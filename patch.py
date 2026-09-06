@@ -1,75 +1,43 @@
-# v8
-import urllib.request, json, os, ssl, sys, traceback, base64
+import urllib.request, os, ssl, sys, re
 
-try:
-    ctx = ssl.create_default_context()
-    CF_TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
-    CF_ACCOUNT = os.environ["CLOUDFLARE_ACCOUNT_ID"]
-    GH_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+ctx = ssl.create_default_context()
+CF_TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
+CF_ACCOUNT = os.environ["CLOUDFLARE_ACCOUNT_ID"]
 
-    print("Downloading worker...")
-    url = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT}/workers/scripts/myreviewly-site"
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {CF_TOKEN}", "Accept": "application/javascript"})
-    resp = urllib.request.urlopen(req, context=ctx)
-    raw = resp.read().decode("utf-8")
-    print(f"Downloaded {len(raw)} bytes")
+print("Downloading worker...")
+url = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT}/workers/scripts/myreviewly-site"
+req = urllib.request.Request(url, headers={"Authorization": f"Bearer {CF_TOKEN}", "Accept": "application/javascript"})
+raw = urllib.request.urlopen(req, context=ctx).read().decode("utf-8")
+print(f"Downloaded {len(raw)} bytes")
 
-    # Strip multipart
-    lines = raw.split("
-")
-    js_lines = []
-    for line in lines:
-        s = line.strip()
-        if s.startswith("--") and len(s) > 20:
-            continue
-        if s.startswith("Content-Disposition:") or s.startswith("Content-Type:"):
-            continue
-        js_lines.append(line)
-    js = "
-".join(js_lines).strip()
+# Strip multipart
+js = "\n".join(l for l in raw.split("\n") if not (l.strip().startswith("--") and len(l.strip()) > 20) and not l.strip().startswith("Content-Disposition:") and not l.strip().startswith("Content-Type:")).strip()
+print(f"Cleaned: {len(js)} bytes")
 
-    # Save debug info
-    debug = f"Total JS length: {len(js)}
+# Detect quote style by looking at what's actually in the nav
+m = re.search(r'href=(.?)#pricing', js)
+if m:
+    q_char = m.group(1)
+    print(f"Quote char around href: {repr(q_char)}")
+else:
+    print("Could not find #pricing in content!")
+    q_char = ''
 
-"
-    debug += f"First 200 chars:
-{repr(js[:200])}
-
-"
-
-    nav_idx = js.find("Pricing")
-    if nav_idx >= 0:
-        debug += f"Around 'Pricing' (idx {nav_idx}):
-{repr(js[max(0,nav_idx-100):nav_idx+200])}
-
-"
-
-    hero_idx = js.find("HERO")
-    if hero_idx >= 0:
-        debug += f"Around 'HERO' (idx {hero_idx}):
-{repr(js[max(0,hero_idx-50):hero_idx+50])}
-
-"
-
-    debug += f"Contains backslash-quote: {'yes' if chr(92)+chr(34) in js else 'no'}
-"
-    debug += f"Contains backslash-n: {'yes' if chr(92)+chr(110) in js else 'no'}
-"
-    debug += f"Contains literal newline in first 500: {'yes' if chr(10) in js[:500] else 'no'}
-"
-
-    with open("debug.txt", "w") as f:
-        f.write(debug)
-    print(debug)
-
-    # Now do the actual modifications
-    has_bs = chr(92) + chr(34) in js  # backslash-quote present?
-    q = chr(92) + chr(34) if has_bs else chr(34)  # \" or "
-    nl = chr(92) + "n" if chr(92) + "n" in js[:500] else "
-"
-
-    # CSS
-    if ".hamburger" not in js and "HERO" in js:
+# CSS - use regex to find the HERO comment and insert before it
+if ".hamburger" not in js:
+    # Detect the newline style
+    hero_match = re.search(r'(/\* HERO \*/)', js)
+    if hero_match:
+        # Check what comes before HERO to understand the line format
+        before_hero = js[max(0,hero_match.start()-20):hero_match.start()]
+        print(f"Before HERO: {repr(before_hero)}")
+        
+        # Use whatever newline style is in the file
+        if "\\n" in before_hero:
+            nl = "\\n"
+        else:
+            nl = "\n"
+        
         css = f"        /* HAMBURGER MENU */{nl}"
         css += f"        .nav-links {{ display: flex; align-items: center; gap: 0; }}{nl}"
         css += f"        .hamburger {{ display: none; background: none; border: none; cursor: pointer; padding: 8px; }}{nl}"
@@ -90,30 +58,52 @@ try:
         css += f"            .nav-links a {{ margin-right: 0 !important; font-size: 1rem; padding: 8px 0; }}{nl}"
         css += f"            .nav-links a.cta-nav {{ width: 100%; text-align: center; padding: 12px; }}{nl}"
         css += f"        }}{nl}{nl}"
-
-        hero_marker = "/* HERO */"
-        if hero_marker in js:
-            js = js.replace(hero_marker, css + "        " + hero_marker, 1)
-            print("OK: CSS added")
-        else:
-            print("HERO marker not found")
-
-    # Nav button
-    old_nav = f'<a href={q}#pricing{q} style={q}margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;{q}>Pricing</a><a href={q}/login{q} style={q}margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;{q}>Log In</a><a href={q}/signup{q} class={q}cta-nav{q}>Start Free Trial</a>'
-
-    if old_nav in js:
-        sq = "'" if not has_bs else chr(92) + "'"
-        btn = f'<button class={q}hamburger{q} onclick={q}this.nextElementSibling.classList.toggle({sq}open{sq}){q} aria-label={q}Menu{q}><svg viewBox={q}0 0 24 24{q} fill={q}none{q} stroke-width={q}2{q} stroke-linecap={q}round{q}><line x1={q}3{q} y1={q}6{q} x2={q}21{q} y2={q}6{q}/><line x1={q}3{q} y1={q}12{q} x2={q}21{q} y2={q}12{q}/><line x1={q}3{q} y1={q}18{q} x2={q}21{q} y2={q}18{q}/></svg></button><div class={q}nav-links{q}>'
-        js = js.replace(old_nav, btn + old_nav + "</div>", 1)
-        print("OK: nav button added")
+        
+        js = js[:hero_match.start()] + css + "        " + js[hero_match.start():]
+        print("OK: CSS added")
     else:
-        print(f"NAV PATTERN NOT FOUND. Pattern length: {len(old_nav)}")
+        print("HERO not found")
 
-    with open("worker.js", "w", encoding="utf-8") as f:
-        f.write(js)
-    print(f"Saved worker.js: {len(js)} bytes")
+# NAV - use regex to find the pricing/login/signup links regardless of quote style
+nav_pattern = re.compile(r'(<a\s+href=[\\"]?#pricing[\\"]?[^>]*>Pricing</a>\s*<a\s+href=[\\"]?/login[\\"]?[^>]*>Log In</a>\s*<a\s+href=[\\"]?/signup[\\"]?[^>]*>Start Free Trial</a>)')
+nav_match = nav_pattern.search(js)
 
-except Exception as e:
-    print(f"FATAL: {e}")
-    traceback.print_exc()
-    sys.exit(1)
+if nav_match and "nav-links" not in js[max(0,nav_match.start()-200):nav_match.start()]:
+    old = nav_match.group(1)
+    print(f"Found nav ({len(old)} chars): {old[:80]}...")
+    
+    # Build button with same quote style
+    q = q_char  # whatever quote char is used
+    if q == '\\':
+        # It's backslash-quote style (\")
+        q = '\\"'
+        sq = "\\'"
+    elif q == '"':
+        q = '"'
+        sq = "'"
+    else:
+        q = '"'
+        sq = "'"
+    
+    btn = f'<button class={q}hamburger{q} onclick={q}this.nextElementSibling.classList.toggle({sq}open{sq}){q} aria-label={q}Menu{q}>'
+    btn += f'<svg viewBox={q}0 0 24 24{q} fill={q}none{q} stroke-width={q}2{q} stroke-linecap={q}round{q}>'
+    btn += f'<line x1={q}3{q} y1={q}6{q} x2={q}21{q} y2={q}6{q}/>'
+    btn += f'<line x1={q}3{q} y1={q}12{q} x2={q}21{q} y2={q}12{q}/>'
+    btn += f'<line x1={q}3{q} y1={q}18{q} x2={q}21{q} y2={q}18{q}/>'
+    btn += f'</svg></button><div class={q}nav-links{q}>'
+    
+    new = btn + old + "</div>"
+    js = js.replace(old, new, 1)
+    print("OK: hamburger button added")
+elif nav_match:
+    print("nav-links already present")
+else:
+    print("NAV PATTERN NOT FOUND via regex")
+    # Emergency debug: show what's around Pricing
+    pidx = js.find("Pricing")
+    if pidx >= 0:
+        print(f"Content around Pricing: {repr(js[max(0,pidx-80):pidx+30])}")
+
+with open("worker.js", "w", encoding="utf-8") as f:
+    f.write(js)
+print(f"Saved: {len(js)} bytes")
