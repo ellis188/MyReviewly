@@ -4,63 +4,44 @@ try:
     ctx = ssl.create_default_context()
     CF_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN", "")
     CF_ACCOUNT = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "")
-
     if not CF_TOKEN or not CF_ACCOUNT:
         print("ERROR: Missing secrets"); sys.exit(1)
 
-    print(f"Account ID: {CF_ACCOUNT[:4]}...{CF_ACCOUNT[-4:]}")
+    print("Downloading worker from Cloudflare...")
+    url = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT}/workers/scripts/myreviewly-site"
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {CF_TOKEN}", "Accept": "application/javascript"})
+    resp = urllib.request.urlopen(req, context=ctx)
+    raw = resp.read().decode("utf-8")
+    print(f"Downloaded {len(raw)} bytes")
 
-    # Try the correct Cloudflare API endpoint for worker script content
-    urls_to_try = [
-        f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT}/workers/scripts/myreviewly-site",
-        f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT}/workers/scripts/myreviewly-site/content/v2",
-    ]
-
-    raw = None
-    for url in urls_to_try:
-        print(f"Trying: {url.split('/workers/')[1]}")
-        try:
-            req = urllib.request.Request(url, headers={
-                "Authorization": f"Bearer {CF_TOKEN}",
-                "Accept": "application/javascript"
-            })
-            resp = urllib.request.urlopen(req, context=ctx)
-            raw = resp.read().decode("utf-8")
-            print(f"OK: downloaded {len(raw)} bytes")
-            break
-        except urllib.error.HTTPError as e:
-            print(f"  HTTP {e.code}: {e.reason}")
+    # Strip multipart boundaries and headers
+    lines = raw.split("\n")
+    js_lines = []
+    skip_headers = True
+    for line in lines:
+        # Skip multipart boundary lines (start with -- followed by hex)
+        stripped = line.strip()
+        if stripped.startswith("--") and len(stripped) > 20:
             continue
+        # Skip Content-Disposition headers
+        if stripped.startswith("Content-Disposition:") or stripped.startswith("Content-Type:"):
+            continue
+        # Skip empty lines at the very start (before JS content)
+        if skip_headers and stripped == "":
+            continue
+        if stripped != "":
+            skip_headers = False
+        js_lines.append(line)
 
-    if not raw:
-        print("FATAL: Could not download worker from any endpoint")
+    js = "\n".join(js_lines)
+    print(f"Cleaned JS: {len(js)} bytes")
+    print(f"Starts with: {js[:40]}")
+    print(f"Ends with: {js[-40:]}")
+
+    # Verify it looks like valid JS
+    if "const LANDING_HTML" not in js:
+        print("ERROR: worker.js doesn't contain LANDING_HTML")
         sys.exit(1)
-
-    # The response might be JSON-wrapped or raw JS
-    js = raw
-    if raw.strip().startswith("{"):
-        try:
-            data = json.loads(raw)
-            if "result" in data:
-                js = data["result"]
-                print("Unwrapped from JSON response")
-        except:
-            pass
-
-    # If multipart, strip boundaries
-    if "--" in js[:100] and "Content-Disposition" in js[:200]:
-        lines = js.split("\n")
-        js_lines = []
-        started = False
-        for line in lines:
-            if "const LANDING_HTML" in line:
-                started = True
-            if started:
-                if line.startswith("--") and len(line) > 30 and line.endswith("--"):
-                    break
-                js_lines.append(line)
-        js = "\n".join(js_lines)
-        print(f"Stripped multipart: {len(js)} bytes")
 
     # Add hamburger CSS
     if ".hamburger" in js:
@@ -88,14 +69,12 @@ try:
         css += "        }\\n\\n"
         js = js.replace("/* HERO */", css + "        /* HERO */")
         print("OK: hamburger CSS added")
-    else:
-        print("WARNING: /* HERO */ not found")
 
     # Add hamburger button
     old_nav = '<a href=\\"#pricing\\" style=\\"margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;\\">Pricing</a><a href=\\"/login\\" style=\\"margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;\\">Log In</a><a href=\\"/signup\\" class=\\"cta-nav\\">Start Free Trial</a>'
 
-    nav_before_close = js[:js.find("</nav>")] if "</nav>" in js else ""
-    if "nav-links" in nav_before_close:
+    nav_section = js[:js.find("</nav>")] if "</nav>" in js else ""
+    if "nav-links" in nav_section:
         print("Hamburger button already present")
     elif old_nav in js:
         btn = '<button class=\\"hamburger\\" onclick=\\"this.nextElementSibling.classList.toggle('
@@ -110,9 +89,9 @@ try:
 
     with open("worker.js", "w", encoding="utf-8") as f:
         f.write(js)
-    print(f"worker.js written: {len(js)} bytes")
+    print(f"worker.js saved: {len(js)} bytes")
 
 except Exception as e:
-    print(f"FATAL ERROR: {e}")
+    print(f"FATAL: {e}")
     traceback.print_exc()
     sys.exit(1)
