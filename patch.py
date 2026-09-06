@@ -1,3 +1,4 @@
+# v8
 import urllib.request, json, os, ssl, sys, traceback, base64
 
 try:
@@ -14,7 +15,8 @@ try:
     print(f"Downloaded {len(raw)} bytes")
 
     # Strip multipart
-    lines = raw.split("\n")
+    lines = raw.split("
+")
     js_lines = []
     for line in lines:
         s = line.strip()
@@ -23,23 +25,38 @@ try:
         if s.startswith("Content-Disposition:") or s.startswith("Content-Type:"):
             continue
         js_lines.append(line)
-    js = "\n".join(js_lines).strip()
+    js = "
+".join(js_lines).strip()
 
     # Save debug info
-    debug = f"Total JS length: {len(js)}\n\n"
-    debug += f"First 200 chars:\n{repr(js[:200])}\n\n"
+    debug = f"Total JS length: {len(js)}
+
+"
+    debug += f"First 200 chars:
+{repr(js[:200])}
+
+"
 
     nav_idx = js.find("Pricing")
     if nav_idx >= 0:
-        debug += f"Around 'Pricing' (idx {nav_idx}):\n{repr(js[max(0,nav_idx-100):nav_idx+200])}\n\n"
+        debug += f"Around 'Pricing' (idx {nav_idx}):
+{repr(js[max(0,nav_idx-100):nav_idx+200])}
+
+"
 
     hero_idx = js.find("HERO")
     if hero_idx >= 0:
-        debug += f"Around 'HERO' (idx {hero_idx}):\n{repr(js[max(0,hero_idx-50):hero_idx+50])}\n\n"
+        debug += f"Around 'HERO' (idx {hero_idx}):
+{repr(js[max(0,hero_idx-50):hero_idx+50])}
 
-    debug += f"Contains backslash-quote: {'yes' if chr(92)+chr(34) in js else 'no'}\n"
-    debug += f"Contains backslash-n: {'yes' if chr(92)+chr(110) in js else 'no'}\n"
-    debug += f"Contains literal newline in first 500: {'yes' if chr(10) in js[:500] else 'no'}\n"
+"
+
+    debug += f"Contains backslash-quote: {'yes' if chr(92)+chr(34) in js else 'no'}
+"
+    debug += f"Contains backslash-n: {'yes' if chr(92)+chr(110) in js else 'no'}
+"
+    debug += f"Contains literal newline in first 500: {'yes' if chr(10) in js[:500] else 'no'}
+"
 
     with open("debug.txt", "w") as f:
         f.write(debug)
@@ -48,7 +65,8 @@ try:
     # Now do the actual modifications
     has_bs = chr(92) + chr(34) in js  # backslash-quote present?
     q = chr(92) + chr(34) if has_bs else chr(34)  # \" or "
-    nl = chr(92) + "n" if chr(92) + "n" in js[:500] else "\n"
+    nl = chr(92) + "n" if chr(92) + "n" in js[:500] else "
+"
 
     # CSS
     if ".hamburger" not in js and "HERO" in js:
