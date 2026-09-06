@@ -1,0 +1,11 @@
+name = "myreviewly-site"
+main = "worker.js"
+compatibility_date = "2024-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "myreviewly-db"
+database_id = "fe8ad207-fadf-4625-8f0f-d2c06e69d845"
+
+[triggers]
+crons = ["0 9 * * *"]
