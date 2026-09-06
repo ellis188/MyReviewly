@@ -1,9 +1,10 @@
-import urllib.request, json, os, ssl, sys, traceback
+import urllib.request, json, os, ssl, sys, traceback, base64
 
 try:
     ctx = ssl.create_default_context()
     CF_TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
     CF_ACCOUNT = os.environ["CLOUDFLARE_ACCOUNT_ID"]
+    GH_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
     print("Downloading worker...")
     url = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT}/workers/scripts/myreviewly-site"
@@ -23,92 +24,76 @@ try:
             continue
         js_lines.append(line)
     js = "\n".join(js_lines).strip()
-    print(f"JS: {len(js)} bytes")
 
-    # DEBUG: Show what the nav area looks like
-    nav_idx = js.find("<nav")
-    if nav_idx < 0:
-        nav_idx = js.find("<nav")
+    # Save debug info
+    debug = f"Total JS length: {len(js)}\n\n"
+    debug += f"First 200 chars:\n{repr(js[:200])}\n\n"
+
+    nav_idx = js.find("Pricing")
     if nav_idx >= 0:
-        nav_end = js.find("</nav>", nav_idx)
-        if nav_end > 0:
-            nav_content = js[nav_idx:nav_end+6]
-            print(f"NAV CONTENT ({len(nav_content)} chars):")
-            print(nav_content[:300])
-            print("...")
+        debug += f"Around 'Pricing' (idx {nav_idx}):\n{repr(js[max(0,nav_idx-100):nav_idx+200])}\n\n"
 
-    # DEBUG: Check what kind of quotes are in the nav
-    if 'href=\\"' in js:
-        print("ESCAPING: double-backslash-quote (JS string literal)")
-        quote = '\\"'
-    elif 'href="' in js:
-        print("ESCAPING: plain quotes (raw HTML)")
-        quote = '"'
-    else:
-        print("ESCAPING: unknown")
-        quote = '"'
+    hero_idx = js.find("HERO")
+    if hero_idx >= 0:
+        debug += f"Around 'HERO' (idx {hero_idx}):\n{repr(js[max(0,hero_idx-50):hero_idx+50])}\n\n"
 
-    # Hamburger CSS
-    if ".hamburger" in js:
-        print("Hamburger CSS already present")
-    else:
-        # Build CSS with the right escaping
-        nl = "\\n" if "\\n" in js[:500] else "\n"
-        css_lines = [
-            "        /* HAMBURGER MENU */" + nl,
-            "        .nav-links { display: flex; align-items: center; gap: 0; }" + nl,
-            "        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }" + nl,
-            "        .hamburger svg { width: 28px; height: 28px; stroke: var(--ink, #1a1a2e); }" + nl,
-            "        @media (max-width: 768px) {" + nl,
-            "            .hamburger { display: block; }" + nl,
-            "            .nav-links {" + nl,
-            "                display: none;" + nl,
-            "                position: absolute; top: 100%; right: 0; left: 0;" + nl,
-            "                background: rgba(255,255,255,0.98);" + nl,
-            "                backdrop-filter: blur(8px);" + nl,
-            "                flex-direction: column; padding: 16px 24px;" + nl,
-            "                border-bottom: 1px solid var(--border);" + nl,
-            "                box-shadow: 0 4px 12px rgba(0,0,0,0.08);" + nl,
-            "                gap: 12px;" + nl,
-            "            }" + nl,
-            "            .nav-links.open { display: flex; }" + nl,
-            "            .nav-links a { margin-right: 0 !important; font-size: 1rem; padding: 8px 0; }" + nl,
-            "            .nav-links a.cta-nav { width: 100%; text-align: center; padding: 12px; }" + nl,
-            "        }" + nl + nl,
-        ]
-        css = "".join(css_lines)
-        if "/* HERO */" in js:
-            js = js.replace("/* HERO */", css + "        /* HERO */")
-            print("OK: hamburger CSS added")
+    debug += f"Contains backslash-quote: {'yes' if chr(92)+chr(34) in js else 'no'}\n"
+    debug += f"Contains backslash-n: {'yes' if chr(92)+chr(110) in js else 'no'}\n"
+    debug += f"Contains literal newline in first 500: {'yes' if chr(10) in js[:500] else 'no'}\n"
+
+    with open("debug.txt", "w") as f:
+        f.write(debug)
+    print(debug)
+
+    # Now do the actual modifications
+    has_bs = chr(92) + chr(34) in js  # backslash-quote present?
+    q = chr(92) + chr(34) if has_bs else chr(34)  # \" or "
+    nl = chr(92) + "n" if chr(92) + "n" in js[:500] else "\n"
+
+    # CSS
+    if ".hamburger" not in js and "HERO" in js:
+        css = f"        /* HAMBURGER MENU */{nl}"
+        css += f"        .nav-links {{ display: flex; align-items: center; gap: 0; }}{nl}"
+        css += f"        .hamburger {{ display: none; background: none; border: none; cursor: pointer; padding: 8px; }}{nl}"
+        css += f"        .hamburger svg {{ width: 28px; height: 28px; stroke: var(--ink, #1a1a2e); }}{nl}"
+        css += f"        @media (max-width: 768px) {{{nl}"
+        css += f"            .hamburger {{ display: block; }}{nl}"
+        css += f"            .nav-links {{{nl}"
+        css += f"                display: none;{nl}"
+        css += f"                position: absolute; top: 100%; right: 0; left: 0;{nl}"
+        css += f"                background: rgba(255,255,255,0.98);{nl}"
+        css += f"                backdrop-filter: blur(8px);{nl}"
+        css += f"                flex-direction: column; padding: 16px 24px;{nl}"
+        css += f"                border-bottom: 1px solid var(--border);{nl}"
+        css += f"                box-shadow: 0 4px 12px rgba(0,0,0,0.08);{nl}"
+        css += f"                gap: 12px;{nl}"
+        css += f"            }}{nl}"
+        css += f"            .nav-links.open {{ display: flex; }}{nl}"
+        css += f"            .nav-links a {{ margin-right: 0 !important; font-size: 1rem; padding: 8px 0; }}{nl}"
+        css += f"            .nav-links a.cta-nav {{ width: 100%; text-align: center; padding: 12px; }}{nl}"
+        css += f"        }}{nl}{nl}"
+
+        hero_marker = "/* HERO */"
+        if hero_marker in js:
+            js = js.replace(hero_marker, css + "        " + hero_marker, 1)
+            print("OK: CSS added")
         else:
-            print("ERROR: /* HERO */ not found")
+            print("HERO marker not found")
 
-    # Hamburger button - try both escaping styles
-    q = quote  # either \" or "
+    # Nav button
     old_nav = f'<a href={q}#pricing{q} style={q}margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;{q}>Pricing</a><a href={q}/login{q} style={q}margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;{q}>Log In</a><a href={q}/signup{q} class={q}cta-nav{q}>Start Free Trial</a>'
 
-    print(f"Looking for nav pattern ({len(old_nav)} chars)...")
-    print(f"Pattern start: {old_nav[:60]}")
-
-    nav_area = js[:js.find("</nav>")] if "</nav>" in js else ""
-    if "nav-links" in nav_area:
-        print("Hamburger button already in nav")
-    elif old_nav in js:
-        sq = "'" if quote == '"' else "\\'"
+    if old_nav in js:
+        sq = "'" if not has_bs else chr(92) + "'"
         btn = f'<button class={q}hamburger{q} onclick={q}this.nextElementSibling.classList.toggle({sq}open{sq}){q} aria-label={q}Menu{q}><svg viewBox={q}0 0 24 24{q} fill={q}none{q} stroke-width={q}2{q} stroke-linecap={q}round{q}><line x1={q}3{q} y1={q}6{q} x2={q}21{q} y2={q}6{q}/><line x1={q}3{q} y1={q}12{q} x2={q}21{q} y2={q}12{q}/><line x1={q}3{q} y1={q}18{q} x2={q}21{q} y2={q}18{q}/></svg></button><div class={q}nav-links{q}>'
         js = js.replace(old_nav, btn + old_nav + "</div>", 1)
-        print("OK: hamburger button added")
+        print("OK: nav button added")
     else:
-        print("ERROR: nav pattern NOT FOUND")
-        # Show what's actually around the nav for debugging
-        if "<nav" in js:
-            idx = js.find("<nav")
-            chunk = js[idx:idx+500]
-            print(f"Actual nav area: {repr(chunk[:200])}")
+        print(f"NAV PATTERN NOT FOUND. Pattern length: {len(old_nav)}")
 
     with open("worker.js", "w", encoding="utf-8") as f:
         f.write(js)
-    print(f"worker.js saved: {len(js)} bytes")
+    print(f"Saved worker.js: {len(js)} bytes")
 
 except Exception as e:
     print(f"FATAL: {e}")
