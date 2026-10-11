@@ -1,0 +1,2492 @@
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+// worker.js
+var __defProp2 = Object.defineProperty;
+var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
+var __defProp22 = Object.defineProperty;
+var __name22 = /* @__PURE__ */ __name2((target, value) => __defProp22(target, "name", { value, configurable: true }), "__name");
+var __defProp222 = Object.defineProperty;
+var __name222 = /* @__PURE__ */ __name22((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+var __defProp2222 = Object.defineProperty;
+var __name2222 = /* @__PURE__ */ __name222((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
+var __defProp22222 = Object.defineProperty;
+var __name22222 = /* @__PURE__ */ __name2222((target, value) => __defProp22222(target, "name", { value, configurable: true }), "__name");
+var __defProp222222 = Object.defineProperty;
+var __name222222 = /* @__PURE__ */ __name22222((target, value) => __defProp222222(target, "name", { value, configurable: true }), "__name");
+var __defProp2222222 = Object.defineProperty;
+var __name2222222 = /* @__PURE__ */ __name222222((target, value) => __defProp2222222(target, "name", { value, configurable: true }), "__name");
+var __defProp22222222 = Object.defineProperty;
+var __name22222222 = /* @__PURE__ */ __name2222222((target, value) => __defProp22222222(target, "name", { value, configurable: true }), "__name");
+var __defProp222222222 = Object.defineProperty;
+var __name222222222 = /* @__PURE__ */ __name22222222((target, value) => __defProp222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp2222222222 = Object.defineProperty;
+var __name2222222222 = /* @__PURE__ */ __name222222222((target, value) => __defProp2222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp22222222222 = Object.defineProperty;
+var __name22222222222 = /* @__PURE__ */ __name2222222222((target, value) => __defProp22222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp222222222222 = Object.defineProperty;
+var __name222222222222 = /* @__PURE__ */ __name22222222222((target, value) => __defProp222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp2222222222222 = Object.defineProperty;
+var __name2222222222222 = /* @__PURE__ */ __name222222222222((target, value) => __defProp2222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp22222222222222 = Object.defineProperty;
+var __name22222222222222 = /* @__PURE__ */ __name2222222222222((target, value) => __defProp22222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp222222222222222 = Object.defineProperty;
+var __name222222222222222 = /* @__PURE__ */ __name22222222222222((target, value) => __defProp222222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp2222222222222222 = Object.defineProperty;
+var __name2222222222222222 = /* @__PURE__ */ __name222222222222222((target, value) => __defProp2222222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp22222222222222222 = Object.defineProperty;
+var __name22222222222222222 = /* @__PURE__ */ __name2222222222222222((target, value) => __defProp22222222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp222222222222222222 = Object.defineProperty;
+var __name222222222222222222 = /* @__PURE__ */ __name22222222222222222((target, value) => __defProp222222222222222222(target, "name", { value, configurable: true }), "__name");
+var __defProp2222222222222222222 = Object.defineProperty;
+var __name2222222222222222222 = /* @__PURE__ */ __name222222222222222222((target, value) => __defProp2222222222222222222(target, "name", { value, configurable: true }), "__name");
+var LANDING_HTML = `<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyReviewly \u2014 More Google Reviews for Your Business</title>
+
+    <meta name="description" content="MyReviewly helps UK small businesses get more Google reviews on autopilot. Simple setup, real results.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <style>
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+
+        :root {
+
+            --ink: #1a1a2e;
+
+            --body: #3d3d5c;
+
+            --muted: #6b6b8d;
+
+            --border: #e2e2ef;
+
+            --surface: #f7f7fb;
+
+            --white: #ffffff;
+
+            --accent: #2563eb;
+
+
+            --star: #f59e0b;
+
+            --success: #059669;
+
+        }
+
+
+
+        html { scroll-behavior: smooth; }
+
+
+
+        body {
+
+            font-family: 'Inter', -apple-system, sans-serif;
+
+            color: var(--body);
+
+            line-height: 1.6;
+
+            background: var(--white);
+
+            -webkit-font-smoothing: antialiased;
+
+        }
+
+
+
+        /* NAV */
+
+        nav {
+
+            position: fixed; top: 0; width: 100%; z-index: 100;
+
+            background: rgba(255,255,255,0.95);
+
+            backdrop-filter: blur(8px);
+
+            border-bottom: 1px solid var(--border);
+
+            padding: 1rem 1.5rem;
+
+            display: flex; justify-content: space-between; align-items: center;
+
+        }
+
+        .logo {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 1.35rem;
+
+            color: var(--ink);
+
+            text-decoration: none;
+
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav a.cta-nav {
+
+            background: var(--accent);
+
+            color: white;
+
+            padding: 0.5rem 1.25rem;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 0.875rem;
+
+            font-weight: 600;
+
+            transition: background 0.2s;
+
+        }
+
+        nav a.cta-nav:hover { background: var(--accent-dark); }
+
+
+
+                /* HAMBURGER MENU */
+        .nav-links { display: flex; align-items: center; gap: 18px; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger svg { width: 28px; height: 28px; stroke: var(--ink, #1a1a2e); }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute; top: 100%; right: 0; left: 0;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(8px);
+                flex-direction: column; padding: 16px 24px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                gap: 12px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin-right: 0 !important; font-size: 1rem; padding: 8px 0; color: #4f46e5; text-decoration: none; }
+            .nav-links a.cta-nav { width: 100%; text-align: center; padding: 12px; background: #2563eb; color: #fff; border-radius: 6px; }
+        }
+
+        /* HERO */
+
+        .hero {
+
+            padding: 8rem 1.5rem 4rem;
+
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 3rem;
+
+            align-items: center;
+
+        }
+
+        @media (max-width: 768px) {
+
+            .hero {
+
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+                padding-top: 7rem;
+
+            }
+
+            .hero-visual { display: flex; justify-content: center; }
+
+        }
+
+        .hero-badge {
+
+            display: inline-flex; align-items: center; gap: 0.4rem;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            padding: 0.35rem 0.9rem;
+
+            border-radius: 50px;
+
+            font-size: 0.8rem;
+
+            color: var(--muted);
+
+            margin-bottom: 1.5rem;
+
+            font-weight: 500;
+
+        }
+
+        .hero-badge .dot {
+
+            width: 6px; height: 6px;
+
+            background: var(--success);
+
+            border-radius: 50%;
+
+        }
+
+        h1 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+
+            color: var(--ink);
+
+            line-height: 1.15;
+
+            margin-bottom: 1.25rem;
+
+            letter-spacing: -0.01em;
+
+        }
+
+        .hero-text p {
+
+            font-size: 1.125rem;
+
+            color: var(--muted);
+
+            max-width: 540px;
+
+            margin-bottom: 2rem;
+
+            line-height: 1.7;
+
+        }
+
+
+
+        /* PHONE MOCKUP */
+
+        .phone-mockup {
+
+            width: 280px;
+
+            background: var(--white);
+
+            border-radius: 32px;
+
+            border: 3px solid #1a1a2e;
+
+            padding: 12px;
+
+            box-shadow: 0 25px 60px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.08);
+
+            position: relative;
+
+        }
+
+        .phone-notch {
+
+            width: 80px;
+
+            height: 6px;
+
+            background: #1a1a2e;
+
+            border-radius: 3px;
+
+            margin: 0 auto 12px;
+
+        }
+
+        .phone-screen {
+
+            background: #f8f9fa;
+
+            border-radius: 20px;
+
+            padding: 16px;
+
+            min-height: 380px;
+
+        }
+
+        .phone-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 16px;
+
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid #e8e8e8;
+
+        }
+
+        .phone-glogo {
+
+            width: 24px; height: 24px;
+
+            background: #4285f4;
+
+            border-radius: 50%;
+
+            display: flex; align-items: center; justify-content: center;
+
+            color: white;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+        }
+
+        .phone-header-text {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: var(--ink);
+
+        }
+
+        .review-card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            margin-bottom: 10px;
+
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+
+        }
+
+        .review-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 6px;
+
+        }
+
+        .review-avatar {
+
+            width: 28px; height: 28px;
+
+            border-radius: 50%;
+
+            display: flex; align-items: center; justify-content: center;
+
+            color: white;
+
+            font-weight: 600;
+
+            font-size: 12px;
+
+        }
+
+        .review-name {
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: var(--ink);
+
+        }
+
+        .review-time {
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+        }
+
+        .review-stars {
+
+            color: var(--star);
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 4px;
+
+        }
+
+        .review-text {
+
+            font-size: 11px;
+
+            color: var(--body);
+
+            line-height: 1.5;
+
+        }
+
+        .review-card.new {
+
+            border: 2px solid #bbf7d0;
+
+            animation: fadeSlide 0.6s ease-out;
+
+        }
+
+        .new-badge {
+
+            display: inline-block;
+
+            background: #ecfdf5;
+
+            color: var(--success);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            padding: 2px 6px;
+
+            border-radius: 4px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            margin-left: auto;
+
+        }
+
+        @keyframes fadeSlide {
+
+            from { opacity: 0; transform: translateY(10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+        .phone-stats {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 12px 14px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-num {
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            color: var(--ink);
+
+        }
+
+        .stat-label {
+
+            font-size: 9px;
+
+            color: var(--muted);
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+
+        /* CTA */
+
+        .cta-group {
+
+            display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
+
+        }
+
+        @media (max-width: 768px) {
+
+            .cta-group { align-items: center; }
+
+        }
+
+        .btn-primary {
+
+            display: inline-block;
+
+            background: var(--accent);
+
+            color: white;
+
+            padding: 0.9rem 2.25rem;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            transition: background 0.2s, transform 0.1s;
+
+            border: none; cursor: pointer;
+
+        }
+
+        .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+        .cta-sub {
+
+            font-size: 0.8rem;
+
+            color: var(--muted);
+
+        }
+
+
+
+        /* SOCIAL PROOF BAR */
+
+        .proof {
+
+            padding: 2.5rem 1.5rem;
+
+            border-top: 1px solid var(--border);
+
+            border-bottom: 1px solid var(--border);
+
+            text-align: center;
+
+        }
+
+        .proof p {
+
+            font-size: 0.9rem;
+
+            color: var(--muted);
+
+            max-width: 540px;
+
+            margin: 0 auto;
+
+        }
+
+        .proof strong { color: var(--ink); font-weight: 600; }
+
+
+
+        /* HOW IT WORKS */
+
+        .how {
+
+            padding: 5rem 1.5rem;
+
+            max-width: 820px;
+
+            margin: 0 auto;
+
+        }
+
+        .section-label {
+
+            font-size: 0.75rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.1em;
+
+            color: var(--accent);
+
+            font-weight: 600;
+
+            margin-bottom: 0.75rem;
+
+        }
+
+        h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+
+            color: var(--ink);
+
+            margin-bottom: 1rem;
+
+            line-height: 1.2;
+
+        }
+
+        .how > p {
+
+            color: var(--muted);
+
+            margin-bottom: 3rem;
+
+            max-width: 560px;
+
+            font-size: 1.05rem;
+
+        }
+
+        .steps {
+
+            display: grid;
+
+            gap: 2rem;
+
+        }
+
+        .step {
+
+            display: flex;
+
+            gap: 1.25rem;
+
+            align-items: flex-start;
+
+        }
+
+        .step-icon {
+
+            flex-shrink: 0;
+
+            width: 48px; height: 48px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            display: flex; align-items: center; justify-content: center;
+
+            font-size: 1.3rem;
+
+        }
+
+        .step h3 {
+
+            font-size: 1.05rem;
+
+            color: var(--ink);
+
+            font-weight: 600;
+
+            margin-bottom: 0.3rem;
+
+            font-family: 'Inter', sans-serif;
+
+        }
+
+        .step p {
+
+            font-size: 0.925rem;
+
+            color: var(--muted);
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* BENEFITS */
+
+        .benefits {
+
+            padding: 5rem 1.5rem;
+
+            background: var(--surface);
+
+        }
+
+        .benefits-inner {
+
+            max-width: 820px;
+
+            margin: 0 auto;
+
+        }
+
+        .benefits h2 { margin-bottom: 2.5rem; }
+
+        .benefit-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 1.5rem;
+
+        }
+
+        @media (min-width: 600px) {
+
+            .benefit-grid { grid-template-columns: 1fr 1fr; }
+
+        }
+
+        .benefit {
+
+            background: var(--white);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 1.5rem;
+
+        }
+
+        .benefit-num {
+
+            font-size: 1.8rem;
+
+            font-family: 'DM Serif Display', serif;
+
+            color: var(--accent);
+
+            line-height: 1;
+
+            margin-bottom: 0.75rem;
+
+        }
+
+        .benefit h3 {
+
+            font-size: 1rem;
+
+            color: var(--ink);
+
+            font-weight: 600;
+
+            margin-bottom: 0.4rem;
+
+            font-family: 'Inter', sans-serif;
+
+        }
+
+        .benefit p {
+
+            font-size: 0.875rem;
+
+            color: var(--muted);
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* WAITLIST */
+
+        .waitlist {
+
+            padding: 5rem 1.5rem;
+
+            max-width: 580px;
+
+            margin: 0 auto;
+
+            text-align: center;
+
+        }
+
+        .waitlist h2 { margin-bottom: 1rem; }
+
+        .waitlist > p {
+
+            color: var(--muted);
+
+            margin-bottom: 2rem;
+
+            font-size: 1.05rem;
+
+        }
+
+        .waitlist-form {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+            max-width: 440px;
+
+            margin: 0 auto 1rem;
+
+        }
+
+        .waitlist-form input {
+
+            flex: 1;
+
+            padding: 0.8rem 1rem;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            font-size: 0.95rem;
+
+            font-family: inherit;
+
+            outline: none;
+
+            transition: border-color 0.2s;
+
+        }
+
+        .waitlist-form input:focus { border-color: var(--accent); }
+
+        .waitlist-form button {
+
+            padding: 0.8rem 1.5rem;
+
+            white-space: nowrap;
+
+        }
+
+        .form-note {
+
+            font-size: 0.8rem;
+
+            color: var(--muted);
+
+        }
+
+        #form-success {
+
+            display: none;
+
+            background: #ecfdf5;
+
+            border: 1px solid #a7f3d0;
+
+            color: var(--success);
+
+            padding: 1rem;
+
+            border-radius: 8px;
+
+            font-weight: 500;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        /* FOOTER */
+
+        footer {
+
+            border-top: 1px solid var(--border);
+
+            padding: 2.5rem 1.5rem;
+
+            text-align: center;
+
+        }
+
+        footer .logo { font-size: 1.1rem; display: block; margin-bottom: 0.75rem; }
+
+        footer p {
+
+            font-size: 0.8rem;
+
+            color: var(--muted);
+
+            line-height: 1.8;
+
+        }
+
+        footer a { color: var(--muted); }
+
+
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            .waitlist-form { flex-direction: column; }
+
+            .waitlist-form button { width: 100%; }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+<nav>
+
+    <a href="/" class="logo">My<span>Reviewly</span></a>
+
+    <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><div class="nav-links"><a href="#how-it-works" style="margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;">How it works</a><a href="#pricing" style="margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;">Pricing</a><a href="/login" style="margin-right:12px;color:#4f46e5;font-weight:500;text-decoration:none;">Log In</a><a href="/signup" class="cta-nav">Start Free Trial</a></div>
+
+</nav>
+
+
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="hero-badge"><span class="dot"></span> Now accepting UK businesses</div>
+
+        <h1>More Google reviews, without the awkward asking</h1>
+
+        <p>MyReviewly automatically asks your genuine customers for an honest review. More reviews means more trust, more clicks, and more bookings \u2014 on autopilot.</p>
+
+        <div class="cta-group">
+
+            <div style="max-width:400px;"><input type="email" id="demo-email" placeholder="Enter your email" style="width:100%;padding:14px;border:2px solid #e2e8f0;border-radius:10px;font-size:1rem;margin-bottom:8px;"><button onclick="sendDemo()" class="btn-primary" style="width:100%;cursor:pointer;">Send Me a Test Email</button><p id="demo-msg" style="margin-top:8px;font-size:0.9rem;"></p></div>
+
+            <span class="cta-sub">No credit card required \xB7 First 25 customers free</span>
+            <a href="/signup" style="display:inline-block;margin-top:16px;padding:14px 32px;background:#1a1a2e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;">Start Free Trial</a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="hero-visual">
+
+        <div class="phone-mockup">
+
+            <div class="phone-notch"></div>
+
+            <div class="phone-screen">
+
+                <div class="phone-header">
+
+                    <div class="phone-glogo">G</div>
+
+                    <div class="phone-header-text">Google Reviews</div>
+
+                </div>
+
+
+
+                <div class="review-card new">
+
+                    <div class="review-top">
+
+                        <div class="review-avatar" style="background:#2563eb;">S</div>
+
+                        <div>
+
+                            <div class="review-name">Sarah M. (example)</div>
+
+                            <div class="review-time">Just now</div>
+
+                        </div>
+
+                        <span class="new-badge">New</span>
+
+                    </div>
+
+                    <div class="review-stars">\u2605\u2605\u2605\u2605\u2605</div>
+
+                    <div class="review-text">Absolutely brilliant service! Best haircut I've had in years. Will definitely be coming back.</div>
+
+                </div>
+
+
+
+                <div class="review-card">
+
+                    <div class="review-top">
+
+                        <div class="review-avatar" style="background:#059669;">J</div>
+
+                        <div>
+
+                            <div class="review-name">James T. (example)</div>
+
+                            <div class="review-time">2 days ago</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="review-stars">\u2605\u2605\u2605\u2605\u2605</div>
+
+                    <div class="review-text">Fixed the boiler same day. Friendly, professional, and fair price. Highly recommend.</div>
+
+                </div>
+
+
+
+                <div class="phone-stats">
+
+                    <div class="stat-item">
+
+                        <div class="stat-num">4.8*</div>
+
+                        <div class="stat-label">Rating</div>
+
+                    </div>
+
+                    <div class="stat-item">
+
+                        <div class="stat-num">127*</div>
+
+                        <div class="stat-label">Reviews</div>
+
+                    </div>
+
+                    <div class="stat-item">
+
+                        <div class="stat-num" style="color:var(--success);">+23*</div>
+
+                        <div class="stat-label">This month</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="proof">
+
+    <p>Built for <strong>hairdressers, plumbers, dentists, restaurants</strong> and every other local business that depends on Google to bring in customers.</p>
+
+</section>
+
+
+
+
+
+
+
+<section class="benefits">
+
+    <div class="benefits-inner">
+
+        <p class="section-label">Why it matters</p>
+
+        <h2>Google reviews are your best salesperson</h2>
+
+        <div class="benefit-grid">
+
+            <div class="benefit">
+
+                <div class="benefit-num">\u2B50</div>
+
+                <h3>Reviews matter</h3>
+
+                <p>Nearly every customer checks Google reviews before choosing a local business. More reviews means more trust at first glance.</p>
+
+            </div>
+
+            <div class="benefit">
+
+                <div class="benefit-num">\u2B50</div>
+
+                <h3>Grow your online reputation</h3>
+
+                <p>Businesses that actively collect reviews consistently see more calls, messages, and bookings from Google Search and Maps.</p>
+
+            </div>
+
+            <div class="benefit">
+
+                <div class="benefit-num">\xA30</div>
+
+                <h3>Free to start</h3>
+
+                <p>No setup fees, no contracts. Start collecting reviews for free during our launch period. First 25 customers free. Then just \xA319 per month.</p>
+
+            </div>
+
+            <div class="benefit">
+
+                <div class="benefit-num">5s</div>
+
+                <h3>Per customer</h3>
+
+                <p>Enter a name and email after each job. That's it. We handle the timing, the message, and the follow-up \u2014 you get back to work.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+<footer>
+
+    <a href="/" class="logo">My<span>Reviewly</span></a>
+
+    <p>
+
+        MyReviewly Ltd \xB7 Poole, Dorset, UK<br>
+
+        <a href="mailto:hello@myreviewly.co.uk">hello@myreviewly.co.uk</a> \xB7 <a href="/privacy">Privacy Policy</a> \xB7 <a href="https://myreviewly.co.uk/terms" style="color:#888;text-decoration:none">Terms</a> \xB7 <a href="https://myreviewly.co.uk/dpa" style="color:#888;text-decoration:none">DPA</a> \xB7 <a href="https://myreviewly.co.uk/anti-spam" style="color:#888;text-decoration:none">Anti-Spam</a>
+
+    </p>
+
+</footer>
+
+
+
+<script>
+
+<\/script>
+
+
+
+
+<section id="how-it-works" style="max-width:900px;margin:0 auto;padding:60px 16px;">
+  <h2 style="text-align:center;font-size:1.8rem;margin-bottom:40px;">How it works</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+    <div style="text-align:center;">
+      <div style="width:48px;height:48px;background:#4f46e5;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;margin:0 auto 16px;">1</div>
+      <h3 style="font-size:1.05rem;margin-bottom:8px;">Sign up in 60 seconds</h3>
+      <p style="color:#64748b;font-size:0.9rem;">Enter your business name and town. We find your Google listing automatically &mdash; no setup, no tech skills needed.</p>
+    </div>
+    <div style="text-align:center;">
+      <div style="width:48px;height:48px;background:#4f46e5;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;margin:0 auto 16px;">2</div>
+      <h3 style="font-size:1.05rem;margin-bottom:8px;">Add your customers</h3>
+      <p style="color:#64748b;font-size:0.9rem;">Paste emails or upload a CSV. One click sends every customer a friendly, personalised review request.</p>
+    </div>
+    <div style="text-align:center;">
+      <div style="width:48px;height:48px;background:#4f46e5;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;margin:0 auto 16px;">3</div>
+      <h3 style="font-size:1.05rem;margin-bottom:8px;">Watch reviews grow</h3>
+      <p style="color:#64748b;font-size:0.9rem;">We follow up automatically at day 3 and day 7. You get more reviews without lifting a finger.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#eef2ff;padding:60px 16px;">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <h2 style="font-size:1.8rem;margin-bottom:16px;">Keep customers happy</h2>
+    <p style="color:#475569;font-size:1.05rem;line-height:1.6;margin-bottom:24px;">Every review request gives your customers two clear options: leave an honest Google review, or contact you privately if something went wrong. You hear about problems before they become bad reviews &mdash; so you can fix the problem before it becomes a 1-star review.</p>
+    <p style="font-weight:600;color:#4f46e5;">Private feedback alerts are included at no extra cost.</p>
+  </div>
+</section>
+
+<section style="padding:60px 16px;" id="pricing">
+  <div style="max-width:400px;margin:0 auto;text-align:center;">
+    <h2 style="font-size:1.8rem;margin-bottom:12px;">Simple pricing</h2>
+    <p style="color:#64748b;margin-bottom:32px;">Everything you need to get more Google reviews on autopilot.</p>
+    <div style="background:#fff;border:2px solid #4f46e5;border-radius:16px;padding:32px;">
+      <p style="font-weight:600;font-size:1.1rem;margin-bottom:4px;">MyReviewly Pro</p>
+      <div style="font-size:3rem;font-weight:700;color:#4f46e5;">&pound;19<span style="font-size:1rem;color:#64748b;font-weight:400;">/month</span></div>
+      <p style="color:#64748b;font-size:0.9rem;margin-bottom:20px;">First 25 customers free. No credit card required.</p>
+      <div style="text-align:left;margin-bottom:24px;">
+        <p style="padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> 250 review sequences/month</p>
+        <p style="padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> Automated follow-up reminders</p>
+        <p style="padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> Private feedback collection</p>
+        <p style="padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> Private negative feedback alerts</p>
+        <p style="padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> Customisable email templates</p>
+        <p style="padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> CSV bulk upload</p>
+        <p style="padding:8px 0;font-size:0.95rem;"><span style="color:#22c55e;font-weight:700;margin-right:8px;">&#10003;</span> Dashboard with tracking</p>
+      </div>
+      <a href="/signup" style="display:block;padding:14px;background:#4f46e5;color:#fff;border-radius:10px;font-weight:600;text-decoration:none;text-align:center;">Start Free Trial</a>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:700px;margin:0 auto;padding:60px 16px;">
+  <h2 style="text-align:center;font-size:1.8rem;margin-bottom:32px;">Common questions</h2>
+  <details style="border-bottom:1px solid #e2e8f0;padding:16px 0;"><summary style="cursor:pointer;font-weight:600;">Do I need any technical skills?</summary><p style="color:#64748b;margin-top:8px;font-size:0.95rem;">None. If you can copy and paste an email address, you can use MyReviewly. Setup takes about a minute.</p></details>
+  <details style="border-bottom:1px solid #e2e8f0;padding:16px 0;"><summary style="cursor:pointer;font-weight:600;">Are these real Google reviews?</summary><p style="color:#64748b;margin-top:8px;font-size:0.95rem;">Yes. Your customers leave reviews directly on your Google Business Profile using their own Google accounts. We just make asking effortless.</p></details>
+  <details style="border-bottom:1px solid #e2e8f0;padding:16px 0;"><summary style="cursor:pointer;font-weight:600;">What happens when a customer gets the email?</summary><p style="color:#64748b;margin-top:8px;font-size:0.95rem;">They can choose to leave an honest Google review or contact you privately. If they contact you privately, their comments come straight to your inbox.</p></details>
+  <details style="border-bottom:1px solid #e2e8f0;padding:16px 0;"><summary style="cursor:pointer;font-weight:600;">Can I cancel anytime?</summary><p style="color:#64748b;margin-top:8px;font-size:0.95rem;">Yes. No contracts, no notice periods. Your first 25 customers are free. No card needed.</p></details>
+  <details style="border-bottom:1px solid #e2e8f0;padding:16px 0;"><summary style="cursor:pointer;font-weight:600;">How is this better than sharing my Google link myself?</summary><p style="color:#64748b;margin-top:8px;font-size:0.95rem;">You could &mdash; but will you? MyReviewly sends to 50 customers in one click, follows up twice automatically, gives every customer the choice to review publicly or contact you privately, and tracks everything. That&rsquo;s the difference between meaning to ask and actually getting reviews.</p></details>
+  <div style="text-align:center;margin-top:40px;">
+    <a href="/signup" style="display:inline-block;padding:14px 32px;background:#4f46e5;color:#fff;border-radius:10px;font-weight:600;text-decoration:none;">Start Free Trial</a>
+    <p style="margin-top:10px;font-size:0.85rem;color:#64748b;">No credit card required &middot; First 25 customers free</p>
+  </div>
+</section>
+<script>function sendDemo(){var e=document.getElementById("demo-email").value;var m=document.getElementById("demo-msg");if(!e||!e.includes("@")){m.style.color="#ef4444";m.textContent="Please enter a valid email.";return}m.style.color="#22c55e";m.textContent="Sending demo...";fetch("/api/demo",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e})}).then(function(r){return r.json()}).then(function(d){if(d.ok){m.style.color="#22c55e";m.textContent="Demo sent! Check your inbox."}else{m.style.color="#ef4444";m.textContent=d.error||"Something went wrong."}})}<\/script></body>
+
+</html>
+
+`;
+var SPA_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyReviewly</title>
+<style>
+:root { --accent: #4f46e5; --accent-dark: #3730a3; --bg: #f8fafc; --card: #fff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; --green: #22c55e; --red: #ef4444; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+a { color: var(--accent); text-decoration: none; }
+.wrap { max-width: 520px; margin: 0 auto; padding: 24px 16px; }
+.logo { font-size: 1.4rem; font-weight: 700; }
+.logo span { color: var(--accent); }
+nav { display: flex; justify-content: space-between; align-items: center; padding: 16px; max-width: 900px; margin: 0 auto; }
+nav a { margin-left: 12px; font-weight: 500; font-size: 0.9rem; }
+.btn { display: inline-block; padding: 14px 28px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; }
+.btn:hover { background: var(--accent-dark); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-outline { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+.btn-green { background: var(--green); }
+.btn-green:hover { background: #16a34a; }
+.btn-sm { padding: 10px 20px; font-size: 0.9rem; width: auto; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; margin-bottom: 20px; }
+input, textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 1rem; margin-bottom: 14px; font-family: inherit; }
+input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+.msg { padding: 12px 16px; border-radius: 10px; margin-bottom: 14px; font-size: 0.9rem; }
+.msg-err { background: #fef2f2; color: var(--red); border: 1px solid #fecaca; }
+.msg-ok { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; font-weight: 700; font-size: 0.9rem; margin-right: 10px; }
+.step-num.done { background: var(--green); }
+.step-title { display: flex; align-items: center; margin-bottom: 12px; }
+.step-title h2 { font-size: 1.15rem; }
+.step-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; line-height: 1.5; }
+.done-check { color: var(--green); font-weight: 700; font-size: 0.9rem; }
+.customer-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.customer-item:last-child { border: none; }
+.badge { padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.badge-pending { background: #fef3c7; color: #92400e; }
+.badge-sent { background: #dbeafe; color: #1d4ed8; }
+.stat-row { display: flex; justify-content: space-around; text-align: center; padding: 20px 0; }
+.stat-item .num { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+.stat-item .lbl { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+@media(max-width:500px) { .stat-row { flex-direction: column; gap: 12px; } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+async function api(path, opts = {}) {
+  const res = await fetch(path, { ...opts, headers: {'Content-Type': 'application/json', ...(opts.headers||{})}, body: opts.body ? JSON.stringify(opts.body) : undefined });
+  const data = await res.json();
+  return {ok: res.ok, ...data};
+}
+function navigate(path) { history.pushState(null, '', path); render(); }
+function render() {
+  const p = location.pathname;
+  const el = document.getElementById('app');
+  if (p === '/signup') renderSignup(el);
+  else if (p === '/login') renderLogin(el);
+  else if (p === '/dashboard') renderDashboard(el);
+  else if (p === '/reset-password') renderResetPassword(el);
+  else if (p === '/gbp-select') renderGbpSelect(el);
+  else window.location.href = '/';
+}
+
+async function renderGbpSelect(el) {
+  el.innerHTML = '<nav><div class="logo">My<span>Reviewly</span></div></nav><div class="wrap"><div class="card"><p>Loading your Google business locations...</p></div></div>';
+  var res = await api('/api/gbp/locations');
+  if (!res.ok) {
+    el.innerHTML = '<nav><div class="logo">My<span>Reviewly</span></div></nav><div class="wrap"><div class="card">' +
+      '<h2 style="margin-bottom:12px;">Could not load your locations</h2>' +
+      '<div class="msg msg-err">' + (res.error || 'Unknown error') + '</div>' +
+      '<button class="btn" onclick="navigate(&quot;/dashboard&quot;)">Back to dashboard</button></div></div>';
+    return;
+  }
+  var h = '<nav><div class="logo">My<span>Reviewly</span></div></nav><div class="wrap"><div class="card">' +
+    '<h2 style="margin-bottom:4px;">Choose your business</h2>' +
+    '<p style="color:var(--muted);margin-bottom:20px;font-size:0.9rem;">These are the locations on your Google Business Profile. Pick the one you want reviews for.</p>' +
+    '<div id="g-msg"></div>';
+  for (var i = 0; i < res.locations.length; i++) {
+    var L = res.locations[i];
+    h += '<div style="border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">' +
+      '<div style="font-weight:600;">' + L.title + '</div>' +
+      '<div style="color:var(--muted);font-size:0.85rem;margin-bottom:10px;">' + (L.address || '') + '</div>' +
+      '<button class="btn btn-sm" onclick="pickGbp(' + i + ')">Use this business</button></div>';
+  }
+  h += '</div></div>';
+  el.innerHTML = h;
+  window.__gbpLocs = res.locations;
+}
+
+async function pickGbp(i) {
+  var L = window.__gbpLocs[i];
+  var msg = document.getElementById('g-msg');
+  msg.innerHTML = '<div class="msg msg-ok">Connecting...</div>';
+  var res = await api('/api/gbp/select', {method:'POST', body:{location_name:L.name, review_uri:L.reviewUri, title:L.title}});
+  if (res.ok) { navigate(&quot;/dashboard&quot;); }
+  else { msg.innerHTML = '<div class="msg msg-err">' + (res.error || 'Failed.') + '</div>'; }
+}
+
+function connectGBP() { window.location.href = '/api/auth/google/start'; }
+
+
+async function searchBusiness() {
+  var q = document.getElementById('biz-search').value.trim();
+  var msg = document.getElementById('search-msg');
+  if (!q || q.length < 2) { msg.innerHTML = '<div class="msg msg-err">Type your business name to search.</div>'; return; }
+  msg.innerHTML = '<div class="msg msg-ok">Searching...</div>';
+  var res = await api('/api/search-business', {method:'POST', body:{query:q}});
+  if (!res.ok) { msg.innerHTML = '<div class="msg msg-err">' + (res.error || 'No results.') + '</div>'; return; }
+  var h = '';
+  for (var i = 0; i < res.results.length; i++) {
+    var r = res.results[i];
+    var stars = r.rating ? r.rating.toFixed(1) + ' stars (' + r.reviewCount + ' reviews)' : '';
+    h += '<div style="border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">';
+    h += '<div style="font-weight:600;">' + r.name + '</div>';
+    h += '<div style="color:var(--muted);font-size:0.85rem;">' + r.address + '</div>';
+    if (stars) h += '<div style="color:#f59e0b;font-size:0.85rem;margin-top:4px;">' + stars + '</div>';
+    h += '<button class="btn btn-sm" style="margin-top:8px;" onclick="selectBusiness(' + i + ')">This is my business</button>';
+    h += '</div>';
+  }
+  msg.innerHTML = h;
+  window.__bizResults = res.results;
+}
+
+async function selectBusiness(i) {
+  var biz = window.__bizResults[i];
+  var msg = document.getElementById('search-msg');
+  msg.innerHTML = '<div class="msg msg-ok">Connecting ' + biz.name + '...</div>';
+  var res = await api('/api/settings', {method:'POST', body:{google_maps_url: 'https://www.google.com/maps/place/?q=place_id:' + biz.placeId}});
+  if (res.ok) {
+    msg.innerHTML = '<div class="msg msg-ok">Connected! Your review link is ready.</div>';
+    setTimeout(function(){renderDashboard(document.getElementById('app'));}, 1000);
+  } else {
+    msg.innerHTML = '<div class="msg msg-err">' + (res.error || 'Failed to connect.') + '</div>';
+  }
+}
+
+function renderSignup(el) {
+  el.innerHTML = '<nav><div class="logo">My<span>Reviewly</span></div><div><a href="/">Home</a></div></nav>' +
+    '<div class="wrap"><div class="card">' +
+    '<h2 style="margin-bottom:4px;">Start your free trial</h2>' +
+    '<p style="color:var(--muted);margin-bottom:20px;font-size:0.9rem;">First 25 customers free. No card needed.</p>' +
+    '<div id="s-msg"></div>' +
+    '<label>Your Business Name</label><input type="text" id="s-name" placeholder="e.g. Smith\\'s Barbershop">' +
+    '<label>Your Email</label><input type="email" id="s-email" placeholder="you@yourbusiness.com">' +
+    '<label>Choose a Password</label><input type="password" id="s-pass" placeholder="At least 8 characters">' +
+    '<button class="btn" id="s-btn" onclick="doSignup()">Create My Account</button>' +
+    '<p style="text-align:center;margin-top:14px;font-size:0.85rem;">Already have an account? <a href="/login" onclick="event.preventDefault();navigate(\\'/login\\')">Log in</a></p>' +
+    '</div></div>';
+}
+
+async function doSignup() {
+  var name = document.getElementById('s-name').value.trim();
+  var email = document.getElementById('s-email').value.trim();
+  var pass = document.getElementById('s-pass').value;
+  var town = '';
+  var msg = document.getElementById('s-msg');
+  var btn = document.getElementById('s-btn');
+  if (!name || !email || !pass) { msg.innerHTML = '<div class="msg msg-err">Please fill in all fields.</div>'; return; }
+  if (pass.length < 8) { msg.innerHTML = '<div class="msg msg-err">Password must be at least 8 characters.</div>'; return; }
+  btn.textContent = 'Creating account...'; btn.disabled = true;
+  var res = await api('/api/signup', {method:'POST', body:{email:email, password:pass, business_name:name, town:town}});
+  if (res.ok) { navigate(&quot;/dashboard&quot;); }
+  else { msg.innerHTML = '<div class="msg msg-err">'+(res.error||'Something went wrong.')+'</div>'; btn.textContent = 'Create My Account'; btn.disabled = false; }
+}
+
+function renderLogin(el) {
+  el.innerHTML = '<nav><div class="logo">My<span>Reviewly</span></div><div><a href="/">Home</a></div></nav>' +
+    '<div class="wrap"><div class="card">' +
+    '<h2 style="margin-bottom:20px;">Welcome back</h2>' +
+    '<div id="l-msg"></div>' +
+    '<label>Email</label><input type="email" id="l-email" placeholder="you@yourbusiness.com">' +
+    '<label>Password</label><input type="password" id="l-pass" placeholder="Your password">' +
+    '<button class="btn" id="l-btn" onclick="doLogin()">Log In</button>' +
+    '<p style="text-align:center;margin-top:10px;font-size:0.85rem;"><a href="#" onclick="event.preventDefault();showForgot()">Forgot your password?</a></p>' +
+    '<p style="text-align:center;margin-top:14px;font-size:0.85rem;">No account? <a href="/signup" onclick="event.preventDefault();navigate(\\'/signup\\')">Start free trial</a></p>' +
+    '</div></div>';
+}
+
+async function doLogin() {
+  var email = document.getElementById('l-email').value.trim();
+  var pass = document.getElementById('l-pass').value;
+  var msg = document.getElementById('l-msg');
+  var btn = document.getElementById('l-btn');
+  if (!email || !pass) { msg.innerHTML = '<div class="msg msg-err">Please fill in both fields.</div>'; return; }
+  btn.textContent = 'Logging in...'; btn.disabled = true;
+  var res = await api('/api/login', {method:'POST', body:{email:email, password:pass}});
+  if (res.ok) { navigate(&quot;/dashboard&quot;); }
+  else { msg.innerHTML = '<div class="msg msg-err">'+(res.error||'Invalid email or password.')+'</div>'; btn.textContent = 'Log In'; btn.disabled = false; }
+}
+
+async function renderDashboard(el) {
+  el.innerHTML = '<div class="wrap" style="padding-top:60px;text-align:center;"><p>Loading...</p></div>';
+  var res = await api('/api/me');
+  if (!res.ok) { navigate('/login'); return; }
+  var user = res.user;
+  var custRes = await api('/api/customers');
+  var customers = custRes.ok ? custRes.customers : [];
+  var statsRes = await api('/api/stats');
+  var stats = statsRes.ok ? statsRes.stats : {sent:0, customers:0, pending:0};
+  var hasMap = !!user.review_link;
+  var hasCust = customers.length > 0;
+  var hasPending = stats.pending > 0;
+  var hasSent = stats.sent > 0;
+
+  var h = '<nav><div class="logo">My<span>Reviewly</span></div><div>' +
+    '<span style="color:var(--muted);font-size:0.85rem;">' + user.business_name + '</span>' +
+    '<a href="#" onclick="event.preventDefault();doLogout()" style="margin-left:10px;font-size:0.85rem;">Log out</a></div></nav><div class="wrap">';
+
+  if (hasSent) {
+    h += '<div class="card"><div class="stat-row">' +
+      '<div class="stat-item"><div class="num">'+stats.customers+'</div><div class="lbl">Customers</div></div>' +
+      '<div class="stat-item"><div class="num">'+stats.sent+'</div><div class="lbl">Reviews Sent</div></div>' +
+      '<div class="stat-item"><div class="num">'+stats.pending+'</div><div class="lbl">Ready to Send</div></div>' +
+      '<div class="stat-item"><div class="num">'+(stats.feedback||0)+'</div><div class="lbl">Private Feedback</div></div></div></div>';
+  }
+
+  // Template editor card (show after they've sent at least once, or always as a settings section)
+  if (hasMap) {
+    var defSubj = 'How was your experience with ' + user.business_name + '?';
+    var defBody = 'Hi {name},\\n\\nThanks for choosing ' + user.business_name + '! We would really appreciate it if you could take 30 seconds to leave us a quick Google review.\\n\\nJust tap the link below:\\n{link}\\n\\nIt really helps other people find us. Thank you!\\n\\nBest,\\n' + user.business_name;
+    var curSubj = user.email_subject || defSubj;
+    var curBody = user.email_body || defBody;
+    h += '<div class="card"><details><summary style="cursor:pointer;font-weight:600;font-size:1rem;">Customise your review email</summary><div style="margin-top:16px;">';
+    h += '<p class="step-desc">Edit the email your customers receive. Use {name} for the customer name, {business} for your business name, and {link} for the review link.</p>';
+    h += '<div id="tpl-msg"></div>';
+    h += '<label>Business Logo URL (optional)</label>' +
+    '<div id="logo-msg"></div>' +
+    '<input type="url" id="logo-url" placeholder="Paste a link to your logo image" value="' + (user.logo_url || '') + '" style="margin-bottom:6px;">' +
+    '<button class="btn btn-sm btn-outline" onclick="saveLogo()" style="margin-bottom:16px;">Save Logo</button>' +
+    (user.logo_url ? '<img src="' + user.logo_url + '" style="max-height:40px;margin-bottom:16px;display:block;" alt="Logo preview">' : '') +
+    '<label>Quick-start templates</label>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">' +
+    '<button class="btn btn-sm btn-outline" style="flex:0 1 auto;padding:6px 12px;font-size:0.8rem;" onclick="loadTemplate(\\'plumber\\')">Plumber</button>' +
+    '<button class="btn btn-sm btn-outline" style="flex:0 1 auto;padding:6px 12px;font-size:0.8rem;" onclick="loadTemplate(\\'electrician\\')">Electrician</button>' +
+    '<button class="btn btn-sm btn-outline" style="flex:0 1 auto;padding:6px 12px;font-size:0.8rem;" onclick="loadTemplate(\\'salon\\')">Salon</button>' +
+    '<button class="btn btn-sm btn-outline" style="flex:0 1 auto;padding:6px 12px;font-size:0.8rem;" onclick="loadTemplate(\\'cleaner\\')">Cleaner</button>' +
+    '<button class="btn btn-sm btn-outline" style="flex:0 1 auto;padding:6px 12px;font-size:0.8rem;" onclick="loadTemplate(\\'garage\\')">Garage</button>' +
+    '<button class="btn btn-sm btn-outline" style="flex:0 1 auto;padding:6px 12px;font-size:0.8rem;" onclick="loadTemplate(\\'generic\\')">Generic</button>' +
+    '</div>' +
+    '<label>Subject line</label><input type="text" id="tpl-subj" value="' + curSubj.replace(/"/g, '&quot;') + '">';
+    h += '<label>Email body</label><textarea id="tpl-body" rows="8">' + curBody.replace(/</g, '&lt;') + '</textarea>';
+    h += '<button class="btn btn-sm btn-outline" onclick="saveTemplate()">Save Template</button>';
+    h += '</div></details></div>';
+  }
+
+  h += '<div class="card"><div class="step-title"><span class="step-num '+(hasMap?'done':'')+'">1</span><h2>'+(hasMap?'Google Business Profile link saved':'Connect your Google Business Profile')+'</h2></div>';
+  if (hasMap) {
+    h += '<p class="done-check" style="margin-bottom:8px;">&#10003; Your review link is ready</p>' +
+      '<p style="font-size:0.85rem;color:var(--muted);word-break:break-all;">Review link: <a href="'+user.review_link+'" target="_blank">'+user.review_link.substring(0,50)+'...</a></p>' +
+      '<button class="btn btn-sm btn-outline" style="margin-top:12px;margin-right:8px;" onclick="sendTest()">Send Yourself a Test</button>' +
+      '<details style="margin-top:12px;display:inline-block;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--accent);">Change Google link</summary>' +
+      '<div style="margin-top:12px;"><p class="step-desc">To find your Google Business Profile URL: search for your business on Google (business.google.com) in your browser, open your listing, then copy the full URL from the address bar. Do not use shortened links (maps.app.goo.gl) &mdash; use the full URL starting with business.google.com.</p><div id="maps-msg"></div><input type="url" id="maps-url" placeholder="Paste the full Google Maps URL here" value="'+(user.google_maps_url||'')+'">' +
+      '<button class="btn btn-outline btn-sm" onclick="saveMaps()">Update</button></div></details>';
+  } else {
+    h += '<p class="step-desc">Search for your business below and select it from the results. This connects your Google review link automatically.</p>' +
+      '<div style="display:flex;gap:8px;margin-bottom:14px;"><input type="text" id="biz-search" placeholder="e.g. Smith Barbershop Bournemouth" style="flex:1;margin-bottom:0;"><button class="btn btn-sm" onclick="searchBusiness()" style="white-space:nowrap;">Search</button></div>' +
+      '<div id="search-msg"></div>' +
+      '<details style="margin-top:16px;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--accent);">Can't find it? Paste your review link manually</summary>' +
+      '<div style="margin-top:12px;"><p class="step-desc">Go to Google Maps, search for your business, copy the URL from the address bar, and paste it below.</p><div id="maps-msg"></div><input type="url" id="maps-url" placeholder="Paste Google Maps URL here">' +
+      '<button class="btn btn-outline btn-sm" onclick="saveMaps()">Save Link</button></div></details>';
+  }
+  h += '</div>';
+
+  // QR Code section
+  if (hasMap && user.review_link) {
+    h += '<div class="card"><details><summary style="cursor:pointer;font-weight:600;font-size:1rem;">Get your review QR code</summary><div style="margin-top:16px;text-align:center;">';
+    h += '<p class="step-desc">Print this QR code on invoices, business cards, receipts or put it on your counter. Customers scan it to leave you a review.</p>';
+    h += '<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent('https://myreviewly.co.uk/r/' + user.id) + '" alt="QR Code" style="margin:16px auto;display:block;">';
+    h += '<p style="font-size:0.85rem;color:var(--muted);margin-top:8px;">Right-click or long-press to save the image</p>';
+    h += '</div></details></div>';
+  }
+
+  if (hasMap) {
+    h += '<div class="card"><div class="step-title"><span class="step-num '+(hasCust?'done':'')+'">2</span><h2>'+(hasCust?'Your customers':'Add your customers')+'</h2></div>';
+    if (!hasCust) h += '<p class="step-desc">Type or paste your customers\\' email addresses below, one per line. These are the people you want to ask for a Google review.</p>';
+    h += '<div id="add-msg"></div>' +
+      '<div style="display:flex;gap:8px;margin-bottom:14px;"><button class="btn btn-sm btn-outline" onclick="document.getElementById(\\'csv-upload\\').click()" style="flex:1;">Upload CSV</button><input type="file" id="csv-upload" accept=".csv" style="display:none;" onchange="handleCSV(this)"></div>' +
+      '<textarea id="cust-emails" rows="3" placeholder="Or type emails here, one per line&#10;customer1@email.com&#10;customer2@email.com"></textarea>' +
+      '<button class="btn btn-sm '+(hasCust?'btn-outline':'')+'" onclick="addCustomers()">'+(hasCust?'Add More':'Add Customers')+'</button>';
+    if (hasCust) {
+      var pendingCust = customers.filter(function(c) { return !c.sent; });
+      var sentCust = customers.filter(function(c) { return c.sent && !c.archived; });
+      var archivedCust = customers.filter(function(c) { return c.sent && c.archived; });
+      if (pendingCust.length > 0) {
+        h += '<div style="margin-top:16px;"><p style="font-weight:600;font-size:0.85rem;color:var(--muted);margin-bottom:8px;">PENDING (' + pendingCust.length + ')</p>';
+        pendingCust.forEach(function(c) { h += '<div class="customer-item"><span>'+c.email+'</span><span class="badge badge-pending">Pending</span></div>'; });
+        h += '</div>';
+      }
+      if (sentCust.length > 0) {
+        h += '<details style="margin-top:16px;"><summary style="cursor:pointer;font-weight:600;font-size:0.85rem;color:var(--muted);">SENT (' + sentCust.length + ') - tap to view</summary><div>';
+        sentCust.forEach(function(c) { h += '<div class="customer-item"><span>'+c.email+'</span><span class="badge badge-sent">Sent</span></div>'; });
+        h += '</div></details>';
+      }
+      if (archivedCust.length > 0) {
+        h += '<details style="margin-top:10px;"><summary style="cursor:pointer;font-weight:600;font-size:0.85rem;color:var(--muted);">ARCHIVED (' + archivedCust.length + ') - reminder cycle finished</summary><div>';
+        archivedCust.forEach(function(c) { h += '<div class="customer-item"><span style="color:var(--muted);">'+c.email+'</span><span class="badge" style="background:#f1f5f9;color:#94a3b8;">Done</span></div>'; });
+        h += '</div></details>';
+      }
+    }
+    h += '</div>';
+  }
+
+  if (hasMap && hasCust) {
+    h += '<div class="card"><div class="step-title"><span class="step-num '+(hasSent&&!hasPending?'done':'')+'">3</span><h2>Send review requests</h2></div>';
+    if (hasPending) {
+      h += '<p class="step-desc">You have <strong>'+stats.pending+' customer'+(stats.pending>1?'s':'')+
+        '</strong> waiting. Hit the button and we\\'ll email each one a friendly message with a one-tap link to leave you a Google review.</p>' +
+        '<div id="send-msg"></div><button class="btn btn-green" onclick="sendReviews()">Send '+stats.pending+' Review Request'+(stats.pending>1?'s':'')+'</button>';
+    } else {
+      h += '<p class="done-check">&#10003; All review requests sent!</p><p style="font-size:0.85rem;color:var(--muted);margin-top:8px;">Add more customers above to send another batch.</p>';
+    }
+    h += '</div>';
+  }
+  h += '</div>';
+  el.innerHTML = h;
+}
+
+async function saveMaps() {
+  var url = document.getElementById('maps-url').value.trim();
+  var msg = document.getElementById('maps-msg');
+  if (!url) { msg.innerHTML = '<div class="msg msg-err">Please paste your Google Business Profile URL.</div>'; return; }
+  if (!url.startsWith('http')) { msg.innerHTML = '<div class="msg msg-err">That doesn\\'t look like a URL. Copy the full URL from your browser.</div>'; return; }
+  msg.innerHTML = '<div class="msg msg-ok">Looking up your business...</div>';
+  var res = await api('/api/settings', {method:'POST', body:{google_maps_url: url}});
+  if (res.ok && res.review_link) { msg.innerHTML = '<div class="msg msg-ok">Found it! Your review link is ready.</div>'; setTimeout(function(){renderDashboard(document.getElementById('app'));}, 1000); }
+  else if (res.ok) { msg.innerHTML = '<div class="msg msg-err">Saved, but couldn\\'t auto-detect your review link. Try the full Google Maps URL.</div>'; setTimeout(function(){renderDashboard(document.getElementById('app'));}, 2000); }
+  else { msg.innerHTML = '<div class="msg msg-err">'+(res.error||'Something went wrong.')+'</div>'; }
+}
+
+async function addCustomers() {
+  var raw = document.getElementById('cust-emails').value.trim();
+  var msg = document.getElementById('add-msg');
+  if (!raw) { msg.innerHTML = '<div class="msg msg-err">Please enter at least one email address.</div>'; return; }
+  var emails = raw.split(/[\\n,]+/).map(function(e){return e.trim();}).filter(function(e){return e.includes('@');});
+  if (!emails.length) { msg.innerHTML = '<div class="msg msg-err">No valid emails found. Put one email per line.</div>'; return; }
+  msg.innerHTML = '<div class="msg msg-ok">Adding...</div>';
+  var res = await api('/api/customers', {method:'POST', body:{emails:emails}});
+  if (res.ok) { msg.innerHTML = '<div class="msg msg-ok">Added '+res.added+' customer'+(res.added!==1?'s':'')+'!</div>'; setTimeout(function(){renderDashboard(document.getElementById('app'));}, 1000); }
+  else { msg.innerHTML = '<div class="msg msg-err">'+(res.error||'Failed.')+'</div>'; }
+}
+
+async function sendReviews() {
+  var msg = document.getElementById('send-msg');
+  msg.innerHTML = '<div class="msg msg-ok">Sending review requests...</div>';
+  var res = await api('/api/send-reviews', {method:'POST'});
+  if (res.ok) { document.getElementById('app').querySelector('.wrap').innerHTML = '<div class="card" style="text-align:center;padding:40px 28px;"><div style="font-size:3rem;margin-bottom:12px;">&#127881;</div><h2 style="margin-bottom:8px;">Review requests sent!</h2><p style="color:var(--muted);margin-bottom:20px;">' + res.sent + ' email' + (res.sent!==1?'s':'') + ' sent to your customers. They will each get a friendly message with a one-tap link to leave you a Google review.</p><p style="color:var(--muted);font-size:0.85rem;margin-bottom:20px;">Reminders will be sent automatically at day 3 and day 7 if they haven\\'t responded.</p><button class="btn" onclick="renderDashboard(document.getElementById(\\'app\\'))">Back to Dashboard</button></div>'; }
+  else { msg.innerHTML = '<div class="msg msg-err">'+(res.error||'Failed to send.')+'</div>'; }
+}
+
+function handleCSV(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var text = e.target.result;
+    var lines = text.split(/[\\n\\r]+/);
+    var emails = [];
+    var emailRegex = /[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}/g;
+    for (var i = 0; i < lines.length; i++) {
+      var found = lines[i].match(emailRegex);
+      if (found) {
+        for (var j = 0; j < found.length; j++) {
+          emails.push(found[j].toLowerCase());
+        }
+      }
+    }
+    // Remove duplicates
+    emails = emails.filter(function(v, i, a) { return a.indexOf(v) === i; });
+    if (emails.length === 0) {
+      document.getElementById('add-msg').innerHTML = '<div class="msg msg-err">No email addresses found in that CSV file.</div>';
+      return;
+    }
+    // Put them in the textarea
+    document.getElementById('cust-emails').value = emails.join('\\n');
+    document.getElementById('add-msg').innerHTML = '<div class="msg msg-ok">Found ' + emails.length + ' email' + (emails.length !== 1 ? 's' : '') + ' in the CSV. Hit Add to import them.</div>';
+  };
+  reader.readAsText(input.files[0]);
+  input.value = '';
+}
+
+function loadTemplate(t) {
+  var subj = document.getElementById('tpl-subj');
+  var body = document.getElementById('tpl-body');
+  var templates = {
+    plumber: {s: 'How was your recent plumbing job?', b: 'Hi {name},\\n\\nThanks for choosing {business} for your recent plumbing work. We hope everything is running smoothly!\\n\\nWe would really appreciate it if you could take 30 seconds to share your experience:\\n{link}\\n\\nYour feedback helps other homeowners find reliable tradespeople.\\n\\nThanks,\\n{business}'},
+    electrician: {s: 'How was your electrical work with {business}?', b: 'Hi {name},\\n\\nThanks for choosing {business} for your electrical work. We hope everything is working perfectly!\\n\\nWould you mind taking 30 seconds to leave us a quick review?\\n{link}\\n\\nIt really helps other customers find trusted electricians.\\n\\nThanks,\\n{business}'},
+    salon: {s: 'Enjoyed your visit to {business}?', b: 'Hi {name},\\n\\nThanks for visiting {business}! We hope you loved your new look.\\n\\nWe would be so grateful if you could leave us a quick review:\\n{link}\\n\\nIt means the world to our team.\\n\\nSee you next time,\\n{business}'},
+    cleaner: {s: 'How did your clean go with {business}?', b: 'Hi {name},\\n\\nThanks for choosing {business} for your recent clean. We hope everything was left sparkling!\\n\\nWould you take 30 seconds to share your experience?\\n{link}\\n\\nYour review helps us reach more customers who need a reliable cleaner.\\n\\nThanks,\\n{business}'},
+    garage: {s: 'How was your service at {business}?', b: 'Hi {name},\\n\\nThanks for bringing your vehicle to {business}. We hope the work was done to your satisfaction.\\n\\nWe would appreciate a quick review if you have 30 seconds:\\n{link}\\n\\nIt helps other motorists find a garage they can trust.\\n\\nThanks,\\n{business}'},
+    generic: {s: 'How was your experience with {business}?', b: 'Hi {name},\\n\\nThanks for choosing {business}! We would really appreciate it if you could take 30 seconds to share your experience.\\n\\nJust tap the link below:\\n{link}\\n\\nIt really helps other people find us. Thank you!\\n\\nBest,\\n{business}'}
+  };
+  var tp = templates[t];
+  if (tp) { subj.value = tp.s; body.value = tp.b; }
+}
+
+async function saveLogo() {
+  var url = document.getElementById('logo-url').value.trim();
+  var msg = document.getElementById('logo-msg');
+  var res = await api('/api/logo', {method:'POST', body:{logo_url:url}});
+  if (res.ok) { msg.innerHTML = '<div class="msg msg-ok">Logo saved!</div>'; setTimeout(function(){renderDashboard(document.getElementById('app'));}, 1000); }
+  else { msg.innerHTML = '<div class="msg msg-err">' + (res.error||'Failed.') + '</div>'; }
+}
+
+async function saveTemplate() {
+  var subj = document.getElementById('tpl-subj').value;
+  var body = document.getElementById('tpl-body').value;
+  var msg = document.getElementById('tpl-msg');
+  msg.innerHTML = '<div class="msg msg-ok">Saving...</div>';
+  var res = await api('/api/template', {method:'POST', body:{email_subject:subj, email_body:body}});
+  if (res.ok) { msg.innerHTML = '<div class="msg msg-ok">Template saved!</div>'; }
+  else { msg.innerHTML = '<div class="msg msg-err">' + (res.error||'Failed.') + '</div>'; }
+}
+
+function renderResetPassword(el) {
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get('token') || '';
+  el.innerHTML = '<nav><div class="logo">My<span>Reviewly</span></div><div><a href="/">Home</a></div></nav>' +
+    '<div class="wrap"><div class="card">' +
+    '<h2 style="margin-bottom:20px;">Set a new password</h2>' +
+    '<div id="r-msg"></div>' +
+    '<label>New Password</label><input type="password" id="r-pass" placeholder="At least 8 characters">' +
+    '<button class="btn" onclick="doResetPassword(\\'' + token + '\\')">Reset Password</button>' +
+    '</div></div>';
+}
+
+async function doResetPassword(token) {
+  var pass = document.getElementById('r-pass').value;
+  var msg = document.getElementById('r-msg');
+  if (!pass || pass.length < 8) { msg.innerHTML = '<div class="msg msg-err">Password must be at least 8 characters.</div>'; return; }
+  msg.innerHTML = '<div class="msg msg-ok">Resetting...</div>';
+  var res = await api('/api/reset-password', {method:'POST', body:{token:token, password:pass}});
+  if (res.ok) { msg.innerHTML = '<div class="msg msg-ok">Password reset! You can now log in.</div>'; setTimeout(function(){navigate('/login');}, 2000); }
+  else { msg.innerHTML = '<div class="msg msg-err">' + (res.error || 'Reset failed. The link may have expired.') + '</div>'; }
+}
+
+function showForgot() {
+  var el = document.getElementById('app');
+  el.innerHTML = '<nav><div class="logo">My<span>Reviewly</span></div><div><a href="/" onclick="event.preventDefault();navigate(\\'/\\')">Home</a></div></nav>' +
+    '<div class="wrap"><div class="card">' +
+    '<h2 style="margin-bottom:8px;">Reset your password</h2>' +
+    '<p style="color:var(--muted);margin-bottom:20px;font-size:0.9rem;">Enter your email and we will send you a reset link.</p>' +
+    '<div id="f-msg"></div>' +
+    '<label>Email</label><input type="email" id="f-email" placeholder="you@yourbusiness.com">' +
+    '<button class="btn" onclick="doForgot()">Send Reset Link</button>' +
+    '<p style="text-align:center;margin-top:14px;font-size:0.85rem;"><a href="/login" onclick="event.preventDefault();navigate(\\'/login\\')">Back to login</a></p>' +
+    '</div></div>';
+}
+
+async function doForgot() {
+  var email = document.getElementById('f-email').value.trim();
+  var msg = document.getElementById('f-msg');
+  if (!email) { msg.innerHTML = '<div class="msg msg-err">Please enter your email.</div>'; return; }
+  msg.innerHTML = '<div class="msg msg-ok">Sending...</div>';
+  var res = await api('/api/forgot-password', {method:'POST', body:{email:email}});
+  if (res.ok) { msg.innerHTML = '<div class="msg msg-ok">If an account exists with that email, we have sent a reset link. Check your inbox.</div>'; }
+  else { msg.innerHTML = '<div class="msg msg-ok">If an account exists with that email, we have sent a reset link. Check your inbox.</div>'; }
+}
+
+async function sendTest() {
+  var res = await api('/api/send-test', {method:'POST'});
+  if (res.ok) { alert('Test email sent! Check your inbox.'); }
+  else { alert(res.error || 'Failed to send test.'); }
+}
+
+async function doLogout() { await api('/api/logout', {method:'POST'}); window.location.href = '/'; }
+window.addEventListener('popstate', render);
+render();
+<\/script>
+</body>
+</html>`;
+var RESEND_KEY = "[REDACTED_RESEND_KEY]";
+var PLACES_KEY = "[REDACTED_GOOGLE_KEY]";
+async function hashPassword(password, salt) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: enc.encode(salt), iterations: 1e5 }, keyMaterial, 256);
+  return btoa(String.fromCharCode(...new Uint8Array(bits)));
+}
+__name(hashPassword, "hashPassword");
+__name2(hashPassword, "hashPassword");
+__name22(hashPassword, "hashPassword");
+__name222(hashPassword, "hashPassword");
+__name2222(hashPassword, "hashPassword");
+__name22222(hashPassword, "hashPassword");
+__name222222(hashPassword, "hashPassword");
+__name2222222(hashPassword, "hashPassword");
+__name22222222(hashPassword, "hashPassword");
+__name222222222(hashPassword, "hashPassword");
+__name2222222222(hashPassword, "hashPassword");
+__name22222222222(hashPassword, "hashPassword");
+__name222222222222(hashPassword, "hashPassword");
+__name2222222222222(hashPassword, "hashPassword");
+__name22222222222222(hashPassword, "hashPassword");
+__name222222222222222(hashPassword, "hashPassword");
+__name2222222222222222(hashPassword, "hashPassword");
+__name22222222222222222(hashPassword, "hashPassword");
+__name222222222222222222(hashPassword, "hashPassword");
+__name2222222222222222222(hashPassword, "hashPassword");
+function generateToken() {
+  const a = new Uint8Array(32);
+  crypto.getRandomValues(a);
+  return Array.from(a, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+__name(generateToken, "generateToken");
+__name2(generateToken, "generateToken");
+__name22(generateToken, "generateToken");
+__name222(generateToken, "generateToken");
+__name2222(generateToken, "generateToken");
+__name22222(generateToken, "generateToken");
+__name222222(generateToken, "generateToken");
+__name2222222(generateToken, "generateToken");
+__name22222222(generateToken, "generateToken");
+__name222222222(generateToken, "generateToken");
+__name2222222222(generateToken, "generateToken");
+__name22222222222(generateToken, "generateToken");
+__name222222222222(generateToken, "generateToken");
+__name2222222222222(generateToken, "generateToken");
+__name22222222222222(generateToken, "generateToken");
+__name222222222222222(generateToken, "generateToken");
+__name2222222222222222(generateToken, "generateToken");
+__name22222222222222222(generateToken, "generateToken");
+__name222222222222222222(generateToken, "generateToken");
+__name2222222222222222222(generateToken, "generateToken");
+function getCookie(req, name) {
+  const c = req.headers.get("Cookie") || "";
+  const m = c.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+  return m ? m[1] : null;
+}
+__name(getCookie, "getCookie");
+__name2(getCookie, "getCookie");
+__name22(getCookie, "getCookie");
+__name222(getCookie, "getCookie");
+__name2222(getCookie, "getCookie");
+__name22222(getCookie, "getCookie");
+__name222222(getCookie, "getCookie");
+__name2222222(getCookie, "getCookie");
+__name22222222(getCookie, "getCookie");
+__name222222222(getCookie, "getCookie");
+__name2222222222(getCookie, "getCookie");
+__name22222222222(getCookie, "getCookie");
+__name222222222222(getCookie, "getCookie");
+__name2222222222222(getCookie, "getCookie");
+__name22222222222222(getCookie, "getCookie");
+__name222222222222222(getCookie, "getCookie");
+__name2222222222222222(getCookie, "getCookie");
+__name22222222222222222(getCookie, "getCookie");
+__name222222222222222222(getCookie, "getCookie");
+__name2222222222222222222(getCookie, "getCookie");
+async function getUser(req, env) {
+  const t = getCookie(req, "session");
+  if (!t)
+    return null;
+  return await env.DB.prepare('SELECT u.* FROM sessions s JOIN users u ON s.user_id=u.id WHERE s.token=? AND s.expires_at>datetime("now")').bind(t).first();
+}
+__name(getUser, "getUser");
+__name2(getUser, "getUser");
+__name22(getUser, "getUser");
+__name222(getUser, "getUser");
+__name2222(getUser, "getUser");
+__name22222(getUser, "getUser");
+__name222222(getUser, "getUser");
+__name2222222(getUser, "getUser");
+__name22222222(getUser, "getUser");
+__name222222222(getUser, "getUser");
+__name2222222222(getUser, "getUser");
+__name22222222222(getUser, "getUser");
+__name222222222222(getUser, "getUser");
+__name2222222222222(getUser, "getUser");
+__name22222222222222(getUser, "getUser");
+__name222222222222222(getUser, "getUser");
+__name2222222222222222(getUser, "getUser");
+__name22222222222222222(getUser, "getUser");
+__name222222222222222222(getUser, "getUser");
+__name2222222222222222222(getUser, "getUser");
+function json(data, status = 200, hdrs = {}) {
+  return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json", ...hdrs } });
+}
+__name(json, "json");
+__name2(json, "json");
+__name22(json, "json");
+__name222(json, "json");
+__name2222(json, "json");
+__name22222(json, "json");
+__name222222(json, "json");
+__name2222222(json, "json");
+__name22222222(json, "json");
+__name222222222(json, "json");
+__name2222222222(json, "json");
+__name22222222222(json, "json");
+__name222222222222(json, "json");
+__name2222222222222(json, "json");
+__name22222222222222(json, "json");
+__name222222222222222(json, "json");
+__name2222222222222222(json, "json");
+__name22222222222222222(json, "json");
+__name222222222222222222(json, "json");
+__name2222222222222222222(json, "json");
+var worker_default = {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.hostname === "www.myreviewly.co.uk") {
+      url.hostname = "myreviewly.co.uk";
+      return Response.redirect(url.toString(), 301);
+    }
+    const path = url.pathname;
+    const method = request.method;
+    if (path === "/api/signup" && method === "POST") {
+      try {
+        const { email, password, business_name, town } = await request.json();
+        if (!email || !password || !business_name)
+          return json({ error: "All fields are required." }, 400);
+        if (password.length < 8)
+          return json({ error: "Password must be at least 8 characters." }, 400);
+        const ex = await env.DB.prepare("SELECT id FROM users WHERE email=?").bind(email.toLowerCase()).first();
+        if (ex)
+          return json({ error: "An account with this email already exists." }, 400);
+        const salt = generateToken().substring(0, 16);
+        const hash = await hashPassword(password, salt);
+        const r = await env.DB.prepare("INSERT INTO users (email,password_hash,business_name,town) VALUES(?,?,?,?)").bind(email.toLowerCase(), salt + ":" + hash, business_name, town || "").run();
+        const uid = r.meta.last_row_id;
+        let reviewLink = "";
+        try {
+          const sq = business_name + (town ? " " + town : "");
+          const pr = await fetch("https://places.googleapis.com/v1/places:searchText", { method: "POST", headers: { "Content-Type": "application/json", "X-Goog-Api-Key": PLACES_KEY, "X-Goog-FieldMask": "places.id" }, body: JSON.stringify({ textQuery: sq }) });
+          const pd = await pr.json();
+          if (pd.places && pd.places.length > 0) {
+            reviewLink = "https://search.google.com/local/writereview?placeid=" + pd.places[0].id;
+            await env.DB.prepare("UPDATE users SET review_link=? WHERE id=?").bind(reviewLink, uid).run();
+          }
+        } catch (e) {
+        }
+        const token = generateToken();
+        const exp = new Date(Date.now() + 30 * 24 * 60 * 60 * 1e3).toISOString();
+        await env.DB.prepare("INSERT INTO sessions (user_id,token,expires_at) VALUES(?,?,?)").bind(uid, token, exp).run();
+        return json({ ok: true }, 200, { "Set-Cookie": "session=" + token + "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000" });
+      } catch (e) {
+        return json({ error: "Signup failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/login" && method === "POST") {
+      try {
+        const { email, password } = await request.json();
+        if (!email || !password)
+          return json({ error: "Email and password required." }, 400);
+        const user = await env.DB.prepare("SELECT * FROM users WHERE email=?").bind(email.toLowerCase()).first();
+        if (!user)
+          return json({ error: "Invalid email or password." }, 401);
+        const [salt, storedHash] = user.password_hash.split(":");
+        const hash = await hashPassword(password, salt);
+        if (hash !== storedHash)
+          return json({ error: "Invalid email or password." }, 401);
+        const token = generateToken();
+        const exp = new Date(Date.now() + 30 * 24 * 60 * 60 * 1e3).toISOString();
+        await env.DB.prepare("INSERT INTO sessions (user_id,token,expires_at) VALUES(?,?,?)").bind(user.id, token, exp).run();
+        return json({ ok: true }, 200, { "Set-Cookie": "session=" + token + "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000" });
+      } catch (e) {
+        return json({ error: "Login failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/logout" && method === "POST") {
+      const t = getCookie(request, "session");
+      if (t)
+        await env.DB.prepare("DELETE FROM sessions WHERE token=?").bind(t).run();
+      return json({ ok: true }, 200, { "Set-Cookie": "session=; Path=/; Max-Age=0" });
+    }
+    if (path === "/api/me") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      return json({ ok: true, user: { id: u.id, email: u.email, business_name: u.business_name, google_maps_url: u.google_maps_url, review_link: u.review_link, town: u.town, email_subject: u.email_subject, email_body: u.email_body, logo_url: u.logo_url } });
+    }
+    if (path === "/api/settings" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const { google_maps_url } = await request.json();
+        let rl = "";
+        if (google_maps_url) {
+          try {
+            let fullUrl = google_maps_url;
+            if (fullUrl.includes("goo.gl") || fullUrl.includes("maps.app")) {
+              try {
+                const redir = await fetch(fullUrl, { redirect: "manual" });
+                const loc = redir.headers.get("location");
+                if (loc)
+                  fullUrl = loc;
+              } catch (e) {
+              }
+            }
+            let sq = "";
+            const ud = decodeURIComponent(fullUrl);
+            const pm = ud.match(/place\/([^/@]+)/);
+            if (pm)
+              sq = pm[1].replace(/\+/g, " ").replace(/%20/g, " ");
+            if (!sq)
+              sq = u.business_name + (u.town ? " " + u.town : "");
+            if (sq) {
+              const pr = await fetch("https://places.googleapis.com/v1/places:searchText", { method: "POST", headers: { "Content-Type": "application/json", "X-Goog-Api-Key": PLACES_KEY, "X-Goog-FieldMask": "places.id,places.displayName" }, body: JSON.stringify({ textQuery: sq }) });
+              const pd = await pr.json();
+              if (pd.places && pd.places.length > 0)
+                rl = "https://search.google.com/local/writereview?placeid=" + pd.places[0].id;
+            }
+          } catch (e) {
+          }
+        }
+        await env.DB.prepare("UPDATE users SET google_maps_url=?,review_link=? WHERE id=?").bind(google_maps_url, rl, u.id).run();
+        return json({ ok: true, review_link: rl });
+      } catch (e) {
+        return json({ error: "Failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/customers" && method === "GET") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      const rows = await env.DB.prepare("SELECT c.*,(SELECT COUNT(*) FROM review_requests r WHERE r.customer_id=c.id) as sent,(SELECT CASE WHEN r2.sent_at < datetime('now','-14 days') THEN 1 ELSE 0 END FROM review_requests r2 WHERE r2.customer_id=c.id ORDER BY r2.sent_at DESC LIMIT 1) as archived FROM customers c WHERE c.user_id=? ORDER BY c.added_at DESC").bind(u.id).all();
+      return json({ ok: true, customers: rows.results });
+    }
+    if (path === "/api/customers" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const { emails } = await request.json();
+        if (!emails || !emails.length)
+          return json({ error: "No emails provided." }, 400);
+        let added = 0;
+        for (const e of emails) {
+          const c = e.toLowerCase().trim();
+          if (!c.includes("@"))
+            continue;
+          try {
+            await env.DB.prepare("INSERT INTO customers (user_id,email) VALUES(?,?)").bind(u.id, c).run();
+            added++;
+          } catch (x) {
+          }
+        }
+        return json({ ok: true, added });
+      } catch (e) {
+        return json({ error: "Failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/send-reviews" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      if (!u.review_link)
+        return json({ error: "Please set your Google Business Profile link first (Step 1)." }, 400);
+      try {
+        const rows = await env.DB.prepare("SELECT c.* FROM customers c WHERE c.user_id=? AND c.id NOT IN (SELECT customer_id FROM review_requests WHERE user_id=?)").bind(u.id, u.id).all();
+        const pending = rows.results;
+        const unsubRows = await env.DB.prepare("SELECT email FROM unsubscribes").all();
+        const unsubEmails = new Set((unsubRows.results || []).map(function(r) {
+          return r.email;
+        }));
+        const filteredPending = pending.filter(function(c) {
+          return !unsubEmails.has(c.email.toLowerCase());
+        });
+        if (!filteredPending.length)
+          return json({ error: "No eligible customers to send to (some may have unsubscribed)." }, 400);
+        if (!pending.length)
+          return json({ error: "No pending customers." }, 400);
+        let sent = 0;
+        for (const cust of filteredPending) {
+          var defaultSubj = "How was your experience with " + u.business_name + "?";
+          var defaultBody = ["Hi" + (cust.name ? " " + cust.name : "") + ",", "", "Thanks for choosing " + u.business_name + "! We would really appreciate it if you could take 30 seconds to leave us a quick Google review.", "", "Just tap the link below:", "https://myreviewly.co.uk/r/" + cust.id, "", "It really helps other people find us. Thank you!", "", "Best,", u.business_name, "", "---", "Unsubscribe: https://myreviewly.co.uk/unsubscribe?email=" + encodeURIComponent(cust.email)].join(String.fromCharCode(10));
+          var emailSubject = (u.email_subject || defaultSubj).replace(/\{business\}/g, u.business_name).replace(/\{name\}/g, cust.name || "").replace(/\{link\}/g, u.review_link);
+          var emailBody = (u.email_body || defaultBody).replace(/\{business\}/g, u.business_name).replace(/\{name\}/g, cust.name || "").replace(/\{link\}/g, u.review_link);
+          const body = emailBody;
+          const rr = await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <reviews@myreviewly.co.uk>", to: [cust.email], subject: "How was your experience with " + u.business_name + "?", text: body }) });
+          if (rr.ok) {
+            await env.DB.prepare("INSERT INTO review_requests (user_id,customer_id) VALUES(?,?)").bind(u.id, cust.id).run();
+            sent++;
+          }
+        }
+        return json({ ok: true, sent });
+      } catch (e) {
+        return json({ error: "Send failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/stats") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      const cc = await env.DB.prepare("SELECT COUNT(*) as c FROM customers WHERE user_id=?").bind(u.id).first();
+      const sc = await env.DB.prepare("SELECT COUNT(*) as c FROM review_requests WHERE user_id=?").bind(u.id).first();
+      const pc = await env.DB.prepare("SELECT COUNT(*) as c FROM customers WHERE user_id=? AND id NOT IN (SELECT customer_id FROM review_requests WHERE user_id=?)").bind(u.id, u.id).first();
+      const fc = await env.DB.prepare("SELECT COUNT(*) as c FROM feedback WHERE user_id=? AND rating<4").bind(u.id).first();
+      return json({ ok: true, stats: { customers: cc.c, sent: sc.c, pending: pc.c, feedback: fc.c } });
+    }
+    if (path === "/api/logo" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const { logo_url } = await request.json();
+        await env.DB.prepare("UPDATE users SET logo_url=? WHERE id=?").bind(logo_url || "", u.id).run();
+        return json({ ok: true });
+      } catch (e) {
+        return json({ error: "Failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/template" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const { email_subject, email_body } = await request.json();
+        await env.DB.prepare("UPDATE users SET email_subject=?,email_body=? WHERE id=?").bind(email_subject || "", email_body || "", u.id).run();
+        return json({ ok: true });
+      } catch (e) {
+        return json({ error: "Failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/send-test" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      if (!u.review_link)
+        return json({ error: "Set up your Google Business Profile link first." }, 400);
+      var testLines = ["Hi,", "", "This is a test of what your customers will receive.", "", "Thanks for choosing " + u.business_name + "! We would really appreciate your honest feedback.", "", "Leave an honest Google review:", "https://myreviewly.co.uk/r/test", "", "Had a problem? Reply to this email and we will sort it out.", "", "Best,", u.business_name, "", "---", "This was a test email from MyReviewly."];
+      var testBody = testLines.join(String.fromCharCode(10));
+      await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <reviews@myreviewly.co.uk>", to: [u.email], subject: "[Test] How was your experience with " + u.business_name + "?", text: testBody }) });
+      return json({ ok: true });
+    }
+    if (path === "/api/demo" && method === "POST") {
+      try {
+        const { email } = await request.json();
+        if (!email)
+          return json({ error: "Please enter your email." }, 400);
+        const emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailCheck.test(email))
+          return json({ error: "Please enter a valid email address." }, 400);
+        var demoLines = ["Hi,", "", "This is a demo of what your customers would receive from MyReviewly.", "", "Thanks for choosing Your Business Name! We would really appreciate it if you could take 30 seconds to share your experience.", "", "Leave an honest Google review:", "https://myreviewly.co.uk/r/test", "", "Had a problem? Reply to this email and we will sort it out.", "", "Best,", "Your Business Name", "", "---", "This was a demo from MyReviewly. Ready to get more reviews?", "Sign up free at https://myreviewly.co.uk/signup"];
+        var demoBody = demoLines.join(String.fromCharCode(10));
+        await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly Demo <hello@myreviewly.co.uk>", to: [email], subject: "[Demo] How was your experience with Your Business?", text: demoBody }) });
+        return json({ ok: true });
+      } catch (e) {
+        return json({ error: "Failed to send demo." }, 500);
+      }
+    }
+    if (path === "/api/forgot-password" && method === "POST") {
+      try {
+        const { email } = await request.json();
+        if (!email)
+          return json({ ok: true });
+        const user = await env.DB.prepare("SELECT id,email FROM users WHERE email=?").bind(email.toLowerCase()).first();
+        if (!user)
+          return json({ ok: true });
+        const resetToken = generateToken();
+        const resetExpires = new Date(Date.now() + 60 * 60 * 1e3).toISOString();
+        await env.DB.prepare("UPDATE users SET reset_token=?,reset_expires=? WHERE id=?").bind(resetToken, resetExpires, user.id).run();
+        var resetUrl = "https://myreviewly.co.uk/reset-password?token=" + resetToken;
+        var emailLines = ["Hi,", "", "You requested a password reset for your MyReviewly account.", "", "Click this link to set a new password:", resetUrl, "", "This link expires in 1 hour.", "", "If you did not request this, you can ignore this email.", "", "MyReviewly"];
+        var emailBody = emailLines.join(String.fromCharCode(10));
+        await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <hello@myreviewly.co.uk>", to: [user.email], subject: "Reset your MyReviewly password", text: emailBody }) });
+        return json({ ok: true });
+      } catch (e) {
+        return json({ ok: true });
+      }
+    }
+    if (path === "/api/reset-password" && method === "POST") {
+      try {
+        const { token, password } = await request.json();
+        if (!token || !password)
+          return json({ error: "Missing token or password." }, 400);
+        if (password.length < 8)
+          return json({ error: "Password must be at least 8 characters." }, 400);
+        const user = await env.DB.prepare("SELECT id FROM users WHERE reset_token=? AND reset_expires>datetime('now')").bind(token).first();
+        if (!user)
+          return json({ error: "Invalid or expired reset link." }, 400);
+        const salt = generateToken().substring(0, 16);
+        const hash = await hashPassword(password, salt);
+        await env.DB.prepare("UPDATE users SET password_hash=?,reset_token='',reset_expires='' WHERE id=?").bind(salt + ":" + hash, user.id).run();
+        return json({ ok: true });
+      } catch (e) {
+        return json({ error: "Reset failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/r/test") {
+      var parts = [];
+      parts.push("<!DOCTYPE html><html><head><meta charset=UTF-8>");
+      parts.push("<meta name=viewport content=width=device-width,initial-scale=1>");
+      parts.push("<title>Demo Feedback Page</title>");
+      parts.push("<style>");
+      parts.push("*{margin:0;padding:0;box-sizing:border-box}");
+      parts.push("body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f0f2f5;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}");
+      parts.push(".card{background:#fff;border-radius:16px;padding:32px;max-width:420px;width:100%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.08)}");
+      parts.push("h1{font-size:1.4rem;margin-bottom:8px;color:#1e293b}");
+      parts.push(".sub{color:#64748b;font-size:0.95rem;margin-bottom:28px;line-height:1.5}");
+      parts.push(".btn-g{display:block;width:100%;padding:16px;background:#22c55e;color:#fff;border:none;border-radius:12px;font-size:1.05rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;margin-bottom:12px}");
+      parts.push(".btn-p{display:block;width:100%;padding:14px;background:#fff;color:#64748b;border:2px solid #e2e8f0;border-radius:12px;font-size:0.95rem;font-weight:500;cursor:pointer;text-align:center;text-decoration:none}");
+      parts.push(".demo-banner{background:#fef3c7;color:#92400e;padding:10px;border-radius:8px;font-size:0.85rem;margin-bottom:20px;font-weight:500}");
+      parts.push("</style></head><body><div class=card>");
+      parts.push("<div class=demo-banner>This is a demo preview of what your customers will see</div>");
+      parts.push("<h1>Thanks for choosing Your Business!</h1>");
+      parts.push("<p class=sub>We would love to hear about your experience. You can leave us an honest Google review or send us private feedback.</p>");
+      parts.push('<a class=btn-g href="https://www.google.com" target="_blank" onclick="return false;">Leave an Honest Google Review</a>');
+      parts.push('<p style="color:#94a3b8;margin:8px 0">or</p>');
+      parts.push('<button class=btn-p onclick="this.textContent=String.fromCharCode(10004,32,68,101,109,111,32,111,110,108,121)">Had a problem? Contact us privately</button>');
+      parts.push("</div></body></html>");
+      return new Response(parts.join(""), { headers: { "Content-Type": "text/html" } });
+    }
+    if (path.startsWith("/r/")) {
+      const custId = parseInt(path.substring(3));
+      if (!custId)
+        return new Response("Invalid link", { status: 400 });
+      const cust = await env.DB.prepare("SELECT c.*, u.business_name, u.review_link FROM customers c JOIN users u ON c.user_id = u.id WHERE c.id = ?").bind(custId).first();
+      if (!cust)
+        return new Response("Link expired", { status: 404 });
+      const biz = cust.business_name || "";
+      const rl = cust.review_link || "";
+      var parts = [];
+      parts.push("<!DOCTYPE html><html><head><meta charset=UTF-8>");
+      parts.push("<meta name=viewport content=width=device-width,initial-scale=1>");
+      parts.push("<title>" + biz + " - Your Feedback</title>");
+      parts.push("<style>");
+      parts.push("*{margin:0;padding:0;box-sizing:border-box}");
+      parts.push("body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f0f2f5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}");
+      parts.push(".card{background:#fff;border-radius:16px;padding:32px;max-width:420px;width:100%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.08)}");
+      parts.push("h1{font-size:1.4rem;margin-bottom:8px;color:#1e293b}");
+      parts.push(".sub{color:#64748b;font-size:0.95rem;margin-bottom:28px;line-height:1.5}");
+      parts.push(".btn-g{display:block;width:100%;padding:16px;background:#22c55e;color:#fff;border:none;border-radius:12px;font-size:1.05rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;margin-bottom:12px}");
+      parts.push(".btn-g:hover{background:#16a34a}");
+      parts.push(".btn-p{display:block;width:100%;padding:14px;background:#fff;color:#64748b;border:2px solid #e2e8f0;border-radius:12px;font-size:0.95rem;font-weight:500;cursor:pointer;text-align:center;text-decoration:none}");
+      parts.push(".btn-p:hover{border-color:#94a3b8;color:#475569}");
+      parts.push(".or{color:#94a3b8;font-size:0.85rem;margin-bottom:12px}");
+      parts.push("textarea{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:10px;font-size:1rem;margin-bottom:14px;font-family:inherit}");
+      parts.push(".btn-s{display:block;width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;text-align:center;color:#fff;background:#4f46e5}");
+      parts.push(".q{color:#94a3b8;font-size:0.8rem;margin-top:12px}");
+      parts.push("#fb-view{display:none}#ty-view{display:none}");
+      parts.push("</style></head><body><div class=card>");
+      parts.push("<div id=main-view>");
+      parts.push("<h1>Thanks for choosing " + biz + "!</h1>");
+      parts.push("<p class=sub>We would love to hear about your experience. You can leave us an honest Google review or send us private feedback.</p>");
+      parts.push("<a class=btn-g href=" + rl + ' target=_blank onclick="track()">Leave an Honest Google Review</a>');
+      parts.push("<p class=or>or</p>");
+      parts.push('<button class=btn-p onclick="showFb()">Had a problem? Contact us privately</button>');
+      parts.push("</div>");
+      parts.push("<div id=fb-view>");
+      parts.push("<h1>Tell us what happened</h1>");
+      parts.push("<p class=sub>Your message goes directly to " + biz + " and will not appear publicly anywhere.</p>");
+      parts.push('<textarea id=fb rows=4 placeholder="Tell us about your experience..."></textarea>');
+      parts.push('<button class=btn-s onclick="sendFb()">Send Private Feedback</button>');
+      parts.push("</div>");
+      parts.push("<div id=ty-view>");
+      parts.push("<h1>Thank you</h1>");
+      parts.push("<p class=sub>Your feedback has been sent to " + biz + ". We appreciate you taking the time.</p>");
+      parts.push("</div>");
+      parts.push("</div>");
+      parts.push("<script>");
+      parts.push('function track(){fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customer_id:' + String(custId) + ",rating:5})})}");
+      parts.push('function showFb(){document.getElementById("main-view").style.display="none";document.getElementById("fb-view").style.display="block"}');
+      parts.push('function sendFb(){var m=document.getElementById("fb").value;fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customer_id:' + String(custId) + ',rating:0,message:m})});document.getElementById("fb-view").style.display="none";document.getElementById("ty-view").style.display="block"}');
+      parts.push("<\/script></body></html>");
+      return new Response(parts.join(""), { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/unsubscribe") {
+      const uEmail = url.searchParams.get("email") || "";
+      if (uEmail) {
+        try {
+          await env.DB.prepare("INSERT OR IGNORE INTO unsubscribes (email) VALUES (?)").bind(uEmail.toLowerCase()).run();
+        } catch (e) {
+        }
+      }
+      return new Response("<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1><style>body{font-family:-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f8fafc;margin:0}.card{background:#fff;border-radius:16px;padding:32px;max-width:400px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.08)}h1{font-size:1.3rem;margin-bottom:8px}p{color:#64748b;font-size:0.95rem}</style></head><body><div class=card><h1>Unsubscribed</h1><p>You have been removed and will not receive any more review request emails.</p></div></body></html>", { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/api/webhook/resend" && method === "POST") {
+      try {
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS email_events (id INTEGER PRIMARY KEY AUTOINCREMENT, event_type TEXT, email TEXT, customer_id TEXT, created_at TEXT DEFAULT (datetime('now')))").run();
+        const body = await request.json();
+        var eventType = body.type || "";
+        var toEmail = "";
+        if (body.data && body.data.to && body.data.to.length > 0) {
+          toEmail = body.data.to[0];
+        }
+        await env.DB.prepare("INSERT INTO email_events (event_type, email) VALUES (?, ?)").bind(eventType, toEmail).run();
+        if (eventType === "email.bounced" || eventType === "email.complained") {
+          await env.DB.prepare("INSERT OR IGNORE INTO unsubscribes (email, created_at) VALUES (?, datetime('now'))").bind(toEmail).run();
+        }
+        return json({ ok: true });
+      } catch (e) {
+        return json({ ok: true });
+      }
+    }
+    if (path === "/api/feedback" && method === "POST") {
+      try {
+        const { customer_id, rating, message } = await request.json();
+        if (!customer_id)
+          return json({ ok: true });
+        const cust = await env.DB.prepare("SELECT c.*, u.id as uid, u.email as owner_email, u.business_name FROM customers c JOIN users u ON c.user_id = u.id WHERE c.id = ?").bind(customer_id).first();
+        if (!cust)
+          return json({ ok: true });
+        await env.DB.prepare("INSERT INTO feedback (user_id, customer_id, rating, message) VALUES (?, ?, ?, ?)").bind(cust.uid, customer_id, rating, message || "").run();
+        if (rating < 4 && message) {
+          var alertLines = ["You received private feedback from a customer.", "", rating ? "Rating: " + rating + "/5" : "Rating: not given", "Customer: " + (cust.email || "Unknown"), "Message: " + message, "", "This feedback was sent privately and does not appear on Google.", "", "MyReviewly"];
+          var alertBody = alertLines.join(String.fromCharCode(10));
+          await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <hello@myreviewly.co.uk>", to: [cust.owner_email], subject: "Private feedback for " + cust.business_name + " (" + rating + "/5)", text: alertBody }) });
+        }
+        return json({ ok: true });
+      } catch (e) {
+        return json({ ok: true });
+      }
+    }
+    var GBP_ID = env.GOOGLE_CLIENT_ID || "";
+    var GBP_SECRET = env.GOOGLE_CLIENT_SECRET || "";
+    var GBP_REDIRECT = "https://myreviewly.co.uk/api/auth/google/callback";
+    var GBP_SCOPE = "https://www.googleapis.com/auth/business.manage";
+    async function gbpAccessToken(env2, userId) {
+      var row = await env2.DB.prepare("SELECT refresh_token FROM gbp_connections WHERE user_id=?").bind(userId).first();
+      if (!row || !row.refresh_token)
+        return null;
+      var r = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "client_id=" + encodeURIComponent(GBP_ID) + "&client_secret=" + encodeURIComponent(GBP_SECRET) + "&refresh_token=" + encodeURIComponent(row.refresh_token) + "&grant_type=refresh_token" });
+      var d = await r.json();
+      return d.access_token || null;
+    }
+    __name(gbpAccessToken, "gbpAccessToken");
+    __name2(gbpAccessToken, "gbpAccessToken");
+    __name22(gbpAccessToken, "gbpAccessToken");
+    __name222(gbpAccessToken, "gbpAccessToken");
+    __name2222(gbpAccessToken, "gbpAccessToken");
+    if (path === "/api/search-business" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const { query } = await request.json();
+        if (!query || query.length < 2)
+          return json({ error: "Please enter your business name." }, 400);
+        const pr = await fetch("https://places.googleapis.com/v1/places:searchText", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-Goog-Api-Key": PLACES_KEY, "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount" },
+          body: JSON.stringify({ textQuery: query, languageCode: "en", regionCode: "GB" })
+        });
+        const pd = await pr.json();
+        if (!pd.places || !pd.places.length)
+          return json({ error: "No businesses found. Try adding your town." }, 400);
+        var results = [];
+        for (const p of pd.places.slice(0, 5)) {
+          results.push({
+            placeId: p.id,
+            name: p.displayName ? p.displayName.text : "",
+            address: p.formattedAddress || "",
+            rating: p.rating || 0,
+            reviewCount: p.userRatingCount || 0,
+            reviewLink: "https://search.google.com/local/writereview?placeid=" + p.id
+          });
+        }
+        return json({ ok: true, results });
+      } catch (e) {
+        return json({ error: "Search failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/auth/google/start") {
+      const gu = await getUser(request, env);
+      if (!gu)
+        return Response.redirect("https://myreviewly.co.uk/login", 302);
+      if (!GBP_ID || !GBP_SECRET)
+        return new Response("Google Business Profile connection is not configured yet. The GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET secrets need to be added in Cloudflare.", { status: 503, headers: { "Content-Type": "text/plain" } });
+      var authUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + encodeURIComponent(GBP_ID) + "&redirect_uri=" + encodeURIComponent(GBP_REDIRECT) + "&response_type=code&access_type=offline&prompt=consent&include_granted_scopes=true&scope=" + encodeURIComponent(GBP_SCOPE);
+      return Response.redirect(authUrl, 302);
+    }
+    if (path === "/api/auth/google/callback") {
+      const gu = await getUser(request, env);
+      if (!gu)
+        return Response.redirect("https://myreviewly.co.uk/login", 302);
+      var code = url.searchParams.get("code");
+      if (!code)
+        return Response.redirect("https://myreviewly.co.uk/dashboard?gbp=denied", 302);
+      try {
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS gbp_connections (user_id INTEGER PRIMARY KEY, refresh_token TEXT, location_name TEXT, review_uri TEXT, connected_at TEXT DEFAULT (datetime('now')))").run();
+        var tr = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "code=" + encodeURIComponent(code) + "&client_id=" + encodeURIComponent(GBP_ID) + "&client_secret=" + encodeURIComponent(GBP_SECRET) + "&redirect_uri=" + encodeURIComponent(GBP_REDIRECT) + "&grant_type=authorization_code" });
+        var td = await tr.json();
+        if (!td.refresh_token)
+          return Response.redirect("https://myreviewly.co.uk/dashboard?gbp=tokenfail", 302);
+        await env.DB.prepare("INSERT INTO gbp_connections (user_id,refresh_token) VALUES(?,?) ON CONFLICT(user_id) DO UPDATE SET refresh_token=excluded.refresh_token").bind(gu.id, td.refresh_token).run();
+        return Response.redirect("https://myreviewly.co.uk/gbp-select", 302);
+      } catch (e) {
+        return Response.redirect("https://myreviewly.co.uk/dashboard?gbp=error", 302);
+      }
+    }
+    if (path === "/api/gbp/locations") {
+      const gu = await getUser(request, env);
+      if (!gu)
+        return json({ error: "Not logged in." }, 401);
+      var at = await gbpAccessToken(env, gu.id);
+      if (!at)
+        return json({ error: "Not connected to Google. Please connect again." }, 400);
+      var ar = await fetch("https://mybusinessaccountmanagement.googleapis.com/v1/accounts", { headers: { Authorization: "Bearer " + at } });
+      var ad = await ar.json();
+      if (ad.error)
+        return json({ error: "Google said: " + (ad.error.message || "access denied") + " (if this mentions quota, the Business Profile API access request has not been approved yet)" }, 400);
+      if (!ad.accounts || !ad.accounts.length)
+        return json({ error: "No Google Business Profile accounts found on that Google account." }, 400);
+      var out = [];
+      for (const acc of ad.accounts) {
+        var lr = await fetch("https://mybusinessbusinessinformation.googleapis.com/v1/" + acc.name + "/locations?readMask=name,title,storefrontAddress,metadata", { headers: { Authorization: "Bearer " + at } });
+        var ld = await lr.json();
+        for (const loc of ld.locations || []) {
+          var addr = "";
+          if (loc.storefrontAddress && loc.storefrontAddress.addressLines)
+            addr = loc.storefrontAddress.addressLines.join(", ");
+          out.push({ name: loc.name, title: loc.title || "", address: addr, reviewUri: loc.metadata && loc.metadata.newReviewUri ? loc.metadata.newReviewUri : "" });
+        }
+      }
+      if (!out.length)
+        return json({ error: "That Google account has no verified business locations." }, 400);
+      return json({ ok: true, locations: out });
+    }
+    if (path === "/api/gbp/select" && method === "POST") {
+      const gu = await getUser(request, env);
+      if (!gu)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const sel = await request.json();
+        await env.DB.prepare("UPDATE gbp_connections SET location_name=?,review_uri=? WHERE user_id=?").bind(sel.location_name || "", sel.review_uri || "", gu.id).run();
+        if (sel.review_uri)
+          await env.DB.prepare("UPDATE users SET review_link=? WHERE id=?").bind(sel.review_uri, gu.id).run();
+        return json({ ok: true });
+      } catch (e) {
+        return json({ error: "Failed: " + e.message }, 500);
+      }
+    }
+    if (path === "/api/gbp/disconnect" && method === "POST") {
+      const gu = await getUser(request, env);
+      if (!gu)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        await env.DB.prepare("DELETE FROM gbp_connections WHERE user_id=?").bind(gu.id).run();
+      } catch (e) {
+      }
+      return json({ ok: true });
+    }
+    if (path === "/pricing") {
+      const pricingHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MyReviewly Pricing</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f8fafc;color:#1e293b}.logo{font-size:1.4rem;font-weight:700}.logo span{color:#4f46e5}nav{display:flex;justify-content:space-between;align-items:center;padding:16px;max-width:900px;margin:0 auto}nav a{margin-left:12px;font-weight:500;font-size:0.9rem;color:#4f46e5;text-decoration:none}.hero{text-align:center;padding:60px 16px 40px;max-width:600px;margin:0 auto}.hero h1{font-size:2rem;margin-bottom:12px}.hero p{color:#64748b;font-size:1.05rem;margin-bottom:32px}.card{background:#fff;border:2px solid #4f46e5;border-radius:16px;padding:32px;max-width:400px;margin:0 auto;text-align:center}.price{font-size:3rem;font-weight:700;color:#4f46e5}.price span{font-size:1rem;color:#64748b;font-weight:400}.features{text-align:left;margin:24px 0;list-style:none}.features li{padding:8px 0;font-size:0.95rem;border-bottom:1px solid #e2e8f0}.features li:last-child{border:none}.check{color:#22c55e;font-weight:700;margin-right:8px}.btn{display:block;width:100%;padding:14px;background:#4f46e5;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;text-align:center}.btn:hover{background:#3730a3}.footer{text-align:center;padding:40px 16px;color:#64748b;font-size:0.85rem;margin-top:40px}</style></head><body><nav><div class="logo">My<span>Reviewly</span></div><div><a href="/">Home</a><a href="/login">Log In</a></div></nav><div class="hero"><h1>Simple pricing. No surprises.</h1><p>Everything you need to get more Google reviews on autopilot.</p></div><div class="card"><p style="font-weight:600;font-size:1.1rem;margin-bottom:4px;">MyReviewly Pro</p><div class="price">&pound;19<span>/month</span></div><p style="color:#64748b;font-size:0.9rem;margin-bottom:16px;">First 25 customers free. No credit card required.</p><ul class="features"><li><span class="check">\u2713</span> 250 review sequences/month</li><li><span class="check">\u2713</span> Automated follow-up reminders (day 3 + day 7)</li><li><span class="check">\u2713</span> Private feedback collection &mdash; catch problems early</li><li><span class="check">\u2713</span> Private negative feedback alerts</li><li><span class="check">\u2713</span> Customisable email templates</li><li><span class="check">\u2713</span> CSV bulk upload</li><li><span class="check">\u2713</span> Dashboard with tracking</li><li><span class="check">\u2713</span> Works with any UK business</li></ul><a href="/signup" class="btn">Start Free Trial</a></div><div class="footer">Cancel anytime. No long-term contracts.<br>MyReviewly Ltd \xB7 Poole, Dorset, UK</div></body></html>';
+      return new Response(pricingHtml, { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/privacy") {
+      return new Response('<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1><title>Privacy Policy - MyReviewly</title></head><body><div style="padding:16px;max-width:700px;margin:0 auto;"><a href="/" style="font-size:1.4rem;font-weight:700;text-decoration:none;color:#1e293b;">My<span style="color:#4f46e5;">Reviewly</span></a></div><div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:700px;margin:40px auto;padding:0 16px;color:#1e293b;line-height:1.7"><h1 style="font-size:1.8rem;margin-bottom:8px">Privacy Policy</h1><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Last updated: August 2026</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Who we are</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">MyReviewly is operated from Poole, Dorset, UK. Contact: hello@myreviewly.co.uk</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">What data we collect</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Business owners: email address, business name, town, password (hashed). Customer end-users: email address provided by the business owner. We also store review request records, feedback messages, and session data.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">How we use your data</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">To provide the review request service: sending emails, follow-up reminders, and feedback alerts on behalf of the business. We do not sell, rent, or share personal data with third parties for their marketing purposes.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Third-party processors</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Cloudflare (hosting, database), Resend (email delivery), Google Places API (business lookup). Payment processing via Stripe when applicable.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Data retention</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Account data is kept while the account is active. Customer email addresses are kept for the duration of the business account. You can request deletion of all data by emailing hello@myreviewly.co.uk.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Your rights</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">You have the right to access, correct, or delete your personal data. End-user customers can unsubscribe from emails using the link in every message. Contact hello@myreviewly.co.uk for any data requests.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Cookies</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">We use a single session cookie for authentication. No tracking or advertising cookies are used.</p></div></body></html>', { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/terms") {
+      return new Response('<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1><title>Terms of Service - MyReviewly</title></head><body><div style="padding:16px;max-width:700px;margin:0 auto;"><a href="/" style="font-size:1.4rem;font-weight:700;text-decoration:none;color:#1e293b;">My<span style="color:#4f46e5;">Reviewly</span></a></div><div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:700px;margin:40px auto;padding:0 16px;color:#1e293b;line-height:1.7"><h1 style="font-size:1.8rem;margin-bottom:8px">Terms of Service</h1><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Last updated: August 2026</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">The service</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">MyReviewly provides automated review request emails and follow-up reminders on behalf of UK businesses. We send emails to customers whose email addresses are provided by the business owner.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Your responsibilities</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">You must only add customer email addresses where you have a legitimate reason to contact them (i.e. they are a genuine customer of your business). You must not upload purchased lists, scraped emails, or contacts who have not done business with you. You are responsible for complying with UK GDPR and PECR when using this service.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Review integrity</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">MyReviewly encourages honest reviews. You must not use this service to selectively solicit only positive reviews, incentivise reviews, or manipulate your Google rating. All customers must be offered the same options: leave an honest Google review or contact you privately.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Payment</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">After your free allocation (first 25 customer review sequences), the service costs 19 GBP per month. You can cancel at any time with no notice period.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Limitation of liability</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">MyReviewly is provided as-is. We do not guarantee any specific number of reviews, rating improvements, or business outcomes. We are not liable for any indirect or consequential losses.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Changes</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">We may update these terms. Continued use of the service after changes constitutes acceptance.</p><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Contact: hello@myreviewly.co.uk</p></div></body></html>', { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/anti-spam") {
+      return new Response('<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1><title>Anti-Spam Policy - MyReviewly</title></head><body><div style="padding:16px;max-width:700px;margin:0 auto;"><a href="/" style="font-size:1.4rem;font-weight:700;text-decoration:none;color:#1e293b;">My<span style="color:#4f46e5;">Reviewly</span></a></div><div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:700px;margin:40px auto;padding:0 16px;color:#1e293b;line-height:1.7"><h1 style="font-size:1.8rem;margin-bottom:8px">Anti-Spam and Acceptable Use Policy</h1><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Last updated: August 2026</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Our commitment</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">MyReviewly is designed to send review requests only to genuine customers of legitimate businesses. We take email deliverability and anti-spam compliance seriously.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">What you must not do</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Upload purchased, rented, or scraped email lists. Send review requests to anyone who is not a genuine customer. Add email addresses without a legitimate business relationship. Attempt to circumvent unsubscribe requests. Use the service to send marketing, promotional, or non-review-related content.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">What we do</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Every email includes an unsubscribe link. Unsubscribed addresses are permanently suppressed. Each customer receives a maximum of 3 emails (1 initial + 2 reminders). Duplicate sends are automatically prevented. We monitor bounce rates and may suspend accounts with excessive bounces.</p><h2 style="font-size:1.2rem;margin-top:24px;margin-bottom:8px">Enforcement</h2><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Accounts found violating this policy may be suspended or terminated without refund.</p><p style="font-size:0.95rem;margin-bottom:12px;color:#475569">Report abuse: hello@myreviewly.co.uk</p></div></body></html>', { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/dpa") {
+      var dpaStyle = "font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:700px;margin:40px auto;padding:0 16px;color:#1e293b;line-height:1.7";
+      var dpaH1 = "font-size:1.8rem;margin-bottom:8px";
+      var dpaH2 = "font-size:1.2rem;margin-top:24px;margin-bottom:8px";
+      var dpaP = "font-size:0.95rem;margin-bottom:12px;color:#475569";
+      var dpaNav = '<div style="padding:16px;max-width:700px;margin:0 auto;"><a href="/" style="font-size:1.4rem;font-weight:700;text-decoration:none;color:#1e293b;">My<span style="color:#4f46e5;">Reviewly</span></a></div>';
+      var dpaHtml = "<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1><title>Data Processing Agreement - MyReviewly</title></head><body>" + dpaNav + '<div style="' + dpaStyle + '"><h1 style="' + dpaH1 + '">Data Processing Agreement</h1><p style="' + dpaP + '">Last updated: August 2026</p><h2 style="' + dpaH2 + '">1. Scope</h2><p style="' + dpaP + '">This DPA applies when MyReviewly processes personal data on behalf of the business owner (the Data Controller). MyReviewly acts as a Data Processor.</p><h2 style="' + dpaH2 + '">2. Data processed</h2><p style="' + dpaP + '">Customer email addresses provided by the business owner for the purpose of sending review request emails and follow-up reminders.</p><h2 style="' + dpaH2 + '">3. Purpose</h2><p style="' + dpaP + '">To send review request emails, follow-up reminders, and collect private feedback on behalf of the business owner.</p><h2 style="' + dpaH2 + '">4. Sub-processors</h2><p style="' + dpaP + '">Cloudflare Inc (USA) \u2014 hosting, database (D1), Workers compute. Resend Inc (USA) \u2014 email delivery. Google LLC (USA) \u2014 Places API for business lookup. Stripe Inc (USA) \u2014 payment processing (when applicable). All sub-processors maintain appropriate security certifications and data processing agreements.</p><h2 style="' + dpaH2 + '">5. Security</h2><p style="' + dpaP + '">Passwords are hashed using PBKDF2 with 100,000 iterations. Sessions use cryptographically random tokens. All data is transmitted over HTTPS/TLS. Database access is restricted to authenticated API calls.</p><h2 style="' + dpaH2 + '">6. Data retention</h2><p style="' + dpaP + '">Customer email data is retained for the duration of the business account. Upon account deletion or request, all associated customer data is permanently deleted.</p><h2 style="' + dpaH2 + '">7. Data subject rights</h2><p style="' + dpaP + '">The business owner (Controller) is responsible for responding to data subject access requests. MyReviewly will assist the Controller in fulfilling these requests. End-user customers can unsubscribe from emails at any time using the link provided in every email.</p><h2 style="' + dpaH2 + '">8. Breach notification</h2><p style="' + dpaP + '">In the event of a personal data breach, MyReviewly will notify the Controller without undue delay and in any event within 72 hours of becoming aware.</p><h2 style="' + dpaH2 + '">9. International transfers</h2><p style="' + dpaP + '">Some sub-processors are based in the USA. Transfers are covered by Standard Contractual Clauses or equivalent safeguards maintained by each sub-processor.</p><p style="' + dpaP + '">Contact: hello@myreviewly.co.uk</p></div></body></html>';
+      return new Response(dpaHtml, { headers: { "Content-Type": "text/html" } });
+    }
+    if (path === "/" || path === "") {
+      return new Response(LANDING_HTML, { headers: { "Content-Type": "text/html" } });
+    }
+    return new Response(SPA_HTML, { headers: { "Content-Type": "text/html" } });
+  },
+  async scheduled(event, env, ctx) {
+    try {
+      const sql1 = "SELECT r.id, r.user_id, r.customer_id, c.email as customer_email, c.name as customer_name, u.business_name, u.review_link FROM review_requests r JOIN customers c ON r.customer_id = c.id JOIN users u ON r.user_id = u.id WHERE r.follow_up_sent = 0 AND r.sent_at < datetime('now', '-3 days') AND u.review_link != ''";
+      const rows1 = await env.DB.prepare(sql1).all();
+      if (rows1.results && rows1.results.length > 0) {
+        for (const req of rows1.results) {
+          var g1 = req.customer_name ? "Hi " + req.customer_name + "," : "Hi,";
+          var lines1 = [g1, "", "Just a quick reminder - we would love to hear how your experience was with " + req.business_name + ".", "", "It only takes 30 seconds. Just tap here:", "https://myreviewly.co.uk/r/" + req.customer_id, "", "Thanks so much!", "", req.business_name];
+          var body1 = lines1.join(String.fromCharCode(10));
+          const rr1 = await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <reviews@myreviewly.co.uk>", to: [req.customer_email], subject: "Quick reminder from " + req.business_name, text: body1 }) });
+          if (rr1.ok) {
+            await env.DB.prepare("UPDATE review_requests SET follow_up_sent = 1 WHERE id = ?").bind(req.id).run();
+          }
+        }
+      }
+      const sql2 = "SELECT r.id, r.user_id, r.customer_id, c.email as customer_email, c.name as customer_name, u.business_name, u.review_link FROM review_requests r JOIN customers c ON r.customer_id = c.id JOIN users u ON r.user_id = u.id WHERE r.follow_up_sent = 1 AND r.sent_at < datetime('now', '-7 days') AND u.review_link != ''";
+      const rows2 = await env.DB.prepare(sql2).all();
+      if (rows2.results && rows2.results.length > 0) {
+        for (const req of rows2.results) {
+          var g2 = req.customer_name ? "Hi " + req.customer_name + "," : "Hi,";
+          var lines2 = [g2, "", "Last chance to leave " + req.business_name + " a quick Google review! It takes under 30 seconds and really helps:", "", "https://myreviewly.co.uk/r/" + req.customer_id, "", "Thank you!", req.business_name];
+          var body2 = lines2.join(String.fromCharCode(10));
+          const rr2 = await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <reviews@myreviewly.co.uk>", to: [req.customer_email], subject: "Last chance to review " + req.business_name, text: body2 }) });
+          if (rr2.ok) {
+            await env.DB.prepare("UPDATE review_requests SET follow_up_sent = 2 WHERE id = ?").bind(req.id).run();
+          }
+        }
+      }
+    } catch (e) {
+    }
+    try {
+      var today = /* @__PURE__ */ new Date();
+      if (today.getUTCDay() === 1) {
+        var allUsers = await env.DB.prepare("SELECT * FROM users WHERE email != ''").all();
+        for (const owner of allUsers.results || []) {
+          var sentWeek = await env.DB.prepare("SELECT COUNT(*) as c FROM review_requests WHERE user_id=? AND sent_at > datetime('now','-7 days')").bind(owner.id).first();
+          var totalCust = await env.DB.prepare("SELECT COUNT(*) as c FROM customers WHERE user_id=?").bind(owner.id).first();
+          var totalSent = await env.DB.prepare("SELECT COUNT(*) as c FROM review_requests WHERE user_id=?").bind(owner.id).first();
+          var fbWeek = await env.DB.prepare("SELECT COUNT(*) as c FROM feedback WHERE user_id=? AND created_at > datetime('now','-7 days')").bind(owner.id).first();
+          if (totalSent.c === 0)
+            continue;
+          var repLines = ["Hi " + (owner.business_name || "") + ",", "", "Here is your weekly MyReviewly report:", "", "This week:", "  Review requests sent: " + (sentWeek.c || 0), "  Private feedback received: " + (fbWeek.c || 0), "", "All time:", "  Total customers: " + (totalCust.c || 0), "  Total review requests sent: " + (totalSent.c || 0), "", "Keep adding customers after each completed job to build your reviews on autopilot.", "", "MyReviewly", "https://myreviewly.co.uk/dashboard"];
+          var repBody = repLines.join(String.fromCharCode(10));
+          await fetch("https://api.resend.com/emails", { method: "POST", headers: { "Authorization": "Bearer " + RESEND_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ from: "MyReviewly <hello@myreviewly.co.uk>", to: [owner.email], subject: "Your weekly MyReviewly report", text: repBody }) });
+        }
+      }
+    } catch (e) {
+    }
+  }
+};
+export {
+  worker_default as default
+};
+//# sourceMappingURL=worker.js.map
