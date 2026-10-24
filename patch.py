@@ -28,6 +28,77 @@ if "--accent-dark: #1d4ed8" not in js and old in js:
 else:
     print("Fix 3 accent-dark: skipped")
 
+# ---- Unsubscribed customers fix ----
+def rep(old, new, label):
+    global js
+    if new in js:
+        print("SKIP (done):", label); return
+    n = js.count(old)
+    if n != 1:
+        print("FAIL:", label, n); sys.exit(1)
+    js = js.replace(old, new); print("OK:", label)
+
+# A. stats: don't count unsubscribed customers as pending
+rep('const pc = await env.DB.prepare("SELECT COUNT(*) as c FROM customers WHERE user_id=? AND id NOT IN (SELECT customer_id FROM review_requests WHERE user_id=?)")',
+    'const pc = await env.DB.prepare("SELECT COUNT(*) as c FROM customers WHERE user_id=? AND id NOT IN (SELECT customer_id FROM review_requests WHERE user_id=?) AND LOWER(email) NOT IN (SELECT email FROM unsubscribes)")',
+    "stats pending excludes unsubscribed")
+
+# B. customers list: flag unsubscribed
+rep('as archived FROM customers c WHERE c.user_id=? ORDER BY c.added_at DESC',
+    'as archived,(SELECT COUNT(*) FROM unsubscribes un WHERE un.email=LOWER(c.email)) as unsub FROM customers c WHERE c.user_id=? ORDER BY c.added_at DESC',
+    "customers unsub flag")
+
+# C. delete route
+DEL = '''    if (path === "/api/customers/delete" && method === "POST") {
+      const u = await getUser(request, env);
+      if (!u)
+        return json({ error: "Not logged in." }, 401);
+      try {
+        const { id } = await request.json();
+        await env.DB.prepare("DELETE FROM customers WHERE id=? AND user_id=? AND id NOT IN (SELECT customer_id FROM review_requests WHERE user_id=?)").bind(id, u.id, u.id).run();
+        return json({ ok: true });
+      } catch (e) {
+        return json({ error: "Failed: " + e.message }, 500);
+      }
+    }
+'''
+anchor = '    if (path === "/api/send-reviews" && method === "POST") {'
+if '/api/customers/delete' not in js:
+    assert js.count(anchor) == 1
+    js = js.replace(anchor, DEL + anchor); print("OK: delete route")
+
+# D. dashboard: split out unsubscribed, add remove buttons
+rep("var pendingCust = customers.filter(function(c) { return !c.sent; });",
+    "var pendingCust = customers.filter(function(c) { return !c.sent && !c.unsub; });\n      var unsubCust = customers.filter(function(c) { return !c.sent && c.unsub; });",
+    "pending filter")
+rep('''pendingCust.forEach(function(c) { h += '<div class="customer-item"><span>'+c.email+'</span><span class="badge badge-pending">Pending</span></div>'; });''',
+    '''pendingCust.forEach(function(c) { h += '<div class="customer-item"><span>'+c.email+'</span><span><span class="badge badge-pending">Pending</span> <button data-id="'+c.id+'" onclick="removeCustomer(this.dataset.id)" style="background:none;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer;padding:0 4px;" aria-label="Remove">&times;</button></span></div>'; });''',
+    "pending remove button")
+rep('''      if (sentCust.length > 0) {
+        h += '<details''',
+    '''      if (unsubCust.length > 0) {
+        h += '<div style="margin-top:16px;"><p style="font-weight:600;font-size:0.85rem;color:var(--muted);margin-bottom:8px;">UNSUBSCRIBED (' + unsubCust.length + ') - won&#39;t be emailed</p>';
+        unsubCust.forEach(function(c) { h += '<div class="customer-item"><span style="color:var(--muted);">'+c.email+'</span><span><span class="badge" style="background:#fee2e2;color:#991b1b;">Unsubscribed</span> <button data-id="'+c.id+'" onclick="removeCustomer(this.dataset.id)" style="background:none;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer;padding:0 4px;" aria-label="Remove">&times;</button></span></div>'; });
+        h += '</div>';
+      }
+      if (sentCust.length > 0) {
+        h += '<details''',
+    "unsubscribed section")
+
+# E. removeCustomer function
+FN = '''
+async function removeCustomer(id) {
+  var res = await api('/api/customers/delete', {method:'POST', body:{id:id}});
+  if (res.ok) { renderDashboard(document.getElementById('app')); }
+}
+
+'''
+a2 = "async function saveMaps() {"
+if "async function removeCustomer" not in js:
+    assert js.count(a2) == 1
+    js = js.replace(a2, FN + a2); print("OK: removeCustomer fn")
+
+
 if "&quot;/dashboard&quot;); }" in js:
     print("FAIL: broken navigate still present"); sys.exit(1)
 
