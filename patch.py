@@ -111,6 +111,14 @@ rep('''        const pd = await pr.json();
     "search shows google error")
 
 
+# G. manual link: accept a pasted Google review link directly when Places lookup fails
+rep('''        await env.DB.prepare("UPDATE users SET google_maps_url=?,review_link=? WHERE id=?").bind(google_maps_url, rl, u.id).run();''',
+    '''        if (!rl && google_maps_url && /writereview|g\\.page\\/r\\/|\\/review/i.test(google_maps_url))
+          rl = google_maps_url;
+        await env.DB.prepare("UPDATE users SET google_maps_url=?,review_link=? WHERE id=?").bind(google_maps_url, rl, u.id).run();''',
+    "manual review link accepted")
+
+
 if "&quot;/dashboard&quot;); }" in js:
     print("FAIL: broken navigate still present"); sys.exit(1)
 
