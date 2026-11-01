@@ -99,6 +99,18 @@ if "async function removeCustomer" not in js:
     js = js.replace(a2, FN + a2); print("OK: removeCustomer fn")
 
 
+# F. business search: show Google's real error instead of hiding it as "No businesses found"
+rep('''        const pd = await pr.json();
+        if (!pd.places || !pd.places.length)
+          return json({ error: "No businesses found. Try adding your town." }, 400);''',
+    '''        const pd = await pr.json();
+        if (pd.error)
+          return json({ error: "Google search error (" + (pd.error.status || pd.error.code || "unknown") + "): " + (pd.error.message || "no message") }, 400);
+        if (!pd.places || !pd.places.length)
+          return json({ error: "No businesses found. Try adding your town." }, 400);''',
+    "search shows google error")
+
+
 if "&quot;/dashboard&quot;); }" in js:
     print("FAIL: broken navigate still present"); sys.exit(1)
 
