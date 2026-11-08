@@ -1,4 +1,4 @@
-import urllib.request, os, ssl, sys
+import urllib.request, os, ssl, sys, re
 
 ctx = ssl.create_default_context()
 CF_TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
@@ -117,6 +117,14 @@ rep('''        await env.DB.prepare("UPDATE users SET google_maps_url=?,review_l
           rl = google_maps_url;
         await env.DB.prepare("UPDATE users SET google_maps_url=?,review_link=? WHERE id=?").bind(google_maps_url, rl, u.id).run();''',
     "manual review link accepted")
+
+
+# H. new restricted Places API key (MyReviewly project)
+_n = len(re.findall(r'var PLACES_KEY = "[^"]*";', js))
+if _n != 1:
+    print("FAIL: PLACES_KEY", _n); sys.exit(1)
+js = re.sub(r'var PLACES_KEY = "[^"]*";', 'var PLACES_KEY = "AIzaSyAPuOHFPxPunWzKcG201YYKSsT8j1Wxvys";', js)
+print("OK: places key set")
 
 
 if "&quot;/dashboard&quot;); }" in js:
