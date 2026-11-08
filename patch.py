@@ -127,6 +127,17 @@ js = re.sub(r'var PLACES_KEY = "[^"]*";', 'var PLACES_KEY = "AIzaSyAPuOHFPxPunWz
 print("OK: places key set")
 
 
+# I. selecting a business: use its place ID directly instead of re-searching (was saving a blank review link)
+rep('''        let rl = "";
+        if (google_maps_url) {''',
+    '''        let rl = "";
+        const pidm = (google_maps_url || "").match(/place_id:([A-Za-z0-9_-]+)/);
+        if (pidm)
+          rl = "https://search.google.com/local/writereview?placeid=" + pidm[1];
+        if (google_maps_url && !rl) {''',
+    "select business uses place id")
+
+
 if "&quot;/dashboard&quot;); }" in js:
     print("FAIL: broken navigate still present"); sys.exit(1)
 
