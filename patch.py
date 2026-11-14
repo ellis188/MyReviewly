@@ -155,6 +155,66 @@ if "25 customer" in js:
     print("FAIL: old offer text still present"); sys.exit(1)
 
 
+# K. 10-day free trial: countdown on dashboard, lock new sends when it ends
+TRIAL_FN = """var TRIAL_COLS_OK = false;
+async function ensureTrialCols(env) {
+  if (TRIAL_COLS_OK) return;
+  try { await env.DB.prepare("ALTER TABLE users ADD COLUMN trial_ends_at TEXT").run(); } catch (e) {}
+  try { await env.DB.prepare("ALTER TABLE users ADD COLUMN subscription_status TEXT").run(); } catch (e) {}
+  TRIAL_COLS_OK = true;
+}
+async function trialState(env, u) {
+  await ensureTrialCols(env);
+  var row = await env.DB.prepare("SELECT trial_ends_at, subscription_status FROM users WHERE id=?").bind(u.id).first();
+  var ends = row && row.trial_ends_at;
+  if (!ends) {
+    ends = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString();
+    await env.DB.prepare("UPDATE users SET trial_ends_at=? WHERE id=?").bind(ends, u.id).run();
+  }
+  var subscribed = !!(row && row.subscription_status === "active");
+  var msLeft = new Date(ends).getTime() - Date.now();
+  var daysLeft = Math.max(0, Math.ceil(msLeft / 86400000));
+  return { trial_ends_at: ends, subscribed: subscribed, days_left: daysLeft, locked: !subscribed && msLeft <= 0 };
+}
+"""
+if "async function trialState(" not in js:
+    assert js.count("var worker_default = {") == 1
+    js = js.replace("var worker_default = {", TRIAL_FN + "var worker_default = {")
+    print("OK: trialState fn")
+
+rep('return json({ ok: true, user: { id: u.id,',
+    'const ts = await trialState(env, u);\n      return json({ ok: true, trial: ts, user: { id: u.id,',
+    "api/me returns trial")
+
+rep('return json({ error: "Please set your Google Business Profile link first (Step 1)." }, 400);',
+    'return json({ error: "Please set your Google Business Profile link first (Step 1)." }, 400);\n      const tsSend = await trialState(env, u);\n      if (tsSend.locked)\n        return json({ error: "Your 10-day free trial has ended. Subscribe for £19/month to keep sending review requests." }, 402);',
+    "send-reviews locked after trial")
+
+rep("var user = res.user;",
+    "var user = res.user;\n  var trial = res.trial || {};",
+    "dashboard reads trial")
+
+rep("""Log out</a></div></nav><div class="wrap">';""",
+    """Log out</a></div></nav><div class="wrap">';
+  if (trial.locked) {
+    h += '<div class="card" style="border:2px solid #ef4444;"><h2 style="margin-bottom:8px;">Your free trial has ended</h2><p class="step-desc">Subscribe for &pound;19/month to keep sending review requests. Your settings and customers are all saved.</p><button class="btn" onclick="startSubscribe()">Subscribe for &pound;19/month</button><div id="sub-msg" style="margin-top:12px;"></div></div>';
+  } else if (!trial.subscribed && trial.days_left) {
+    h += '<div class="msg msg-ok" style="margin-bottom:20px;">Free trial: <strong>' + trial.days_left + ' day' + (trial.days_left === 1 ? '' : 's') + ' left</strong> &middot; <a href="#" onclick="event.preventDefault();startSubscribe()">Subscribe now</a></div><div id="sub-msg"></div>';
+  }""",
+    "dashboard trial banner")
+
+SUBFN = """function startSubscribe() {
+  var m = document.getElementById('sub-msg');
+  if (m) m.innerHTML = '<div class="msg msg-ok">Online payments are coming very soon. Email hello@myreviewly.co.uk and we will get you set up.</div>';
+}
+
+"""
+if "function startSubscribe()" not in js:
+    assert js.count("async function doLogout()") == 1
+    js = js.replace("async function doLogout()", SUBFN + "async function doLogout()")
+    print("OK: startSubscribe fn")
+
+
 if "&quot;/dashboard&quot;); }" in js:
     print("FAIL: broken navigate still present"); sys.exit(1)
 
