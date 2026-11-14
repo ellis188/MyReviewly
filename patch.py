@@ -138,6 +138,23 @@ rep('''        let rl = "";
     "select business uses place id")
 
 
+# J. pricing offer: "first 25 customers free" -> 10-day free trial
+_offer = [
+    ("First 25 customers free. Then just", "Try it free for 10 days. Then just"),
+    ("First 25 customers free. No credit card required.", "10-day free trial. No credit card required."),
+    ("Your first 25 customers are free. No card needed.", "Every account starts with a 10-day free trial. No card needed."),
+    ("First 25 customers free. No card needed.", "10-day free trial. No card needed."),
+    ("First 25 customers free</span>", "10-day free trial</span>"),
+    ("First 25 customers free</p>", "10-day free trial</p>"),
+    ("After your free allocation (first 25 customer review sequences), the service costs", "After your 10-day free trial, the service costs"),
+]
+for _o, _n in _offer:
+    print("Offer:", js.count(_o), "x", _n[:40])
+    js = js.replace(_o, _n)
+if "25 customer" in js:
+    print("FAIL: old offer text still present"); sys.exit(1)
+
+
 if "&quot;/dashboard&quot;); }" in js:
     print("FAIL: broken navigate still present"); sys.exit(1)
 
